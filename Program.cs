@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System;//Thread.Sleep
 using System.Threading;
 
 
@@ -9,23 +9,29 @@ namespace TEST
         public static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.Cyan; // making console text color in cyan
-            
+
             Player player = new Player();
             BeginningInformation welcomeInfo = new BeginningInformation();
             Fighting fighting = new Fighting();
             GameOver gameOver = new GameOver();
+            ClearingLine clr = new ClearingLine();
 
             welcomeInfo.WelcomeInfo();
-            
             player.PlayerName(); // message to enter your name 
+            
+
+            Console.WriteLine($"{Player.playerName} press any key to continue!");
+            Console.ReadKey();
+            clr.ClearingLines();
+            Console.Clear();
+            
             //Thread.Sleep(2000); // 2 seconds of sleep
             Console.WriteLine($"Hello {Player.playerName}! Nice to meet you!"); // hello message
             Console.WriteLine(); // empty line
-            player.PlayerWeapon();
-
-            fighting.Fight();
-
-            gameOver.Over();
+            
+            player.PlayerWeapon(); // picking starting weapon
+            fighting.Fight(); // whole fight logic
+            gameOver.Over(); // when game is over statistics,info etc..
         }
     }
     public class BeginningInformation
@@ -411,6 +417,10 @@ namespace TEST
                 {
                     if (Player.playerHunger <= 30)
                     {
+                        if (Player.playerHunger < 0)
+                        {
+                            Player.playerHunger = 0;
+                        }
                         Console.WriteLine($"Consume some food {Player.playerName}?" +
                         $"{Environment.NewLine}Your hunger bar is : {Player.playerHunger}/100");
                         Console.WriteLine($"{Player.playerName} you have {Player.playerFood} food");
@@ -549,7 +559,7 @@ namespace TEST
                                     for (int i = 0; i < leveledUp.Length; i++)
                                     {
                                         Console.Write($"{leveledUp[i]}");
-                                        Thread.Sleep(300);
+                                        //Thread.Sleep(300);
                                     }
                                     Console.WriteLine();
 
@@ -641,7 +651,7 @@ namespace TEST
                                 Player.playerHunger -= 20;
                                 break;
                         }
-                        
+
                         if (Player.playerHunger < 0)
                         {
                             Player.playerHealth -= 5;
@@ -680,7 +690,7 @@ namespace TEST
                                     Player.playerHunger -= 8;
                                     break;
                             }
-                            
+
                             if (Player.playerHunger < 0)
                             {
                                 Player.playerHealth -= 5;
@@ -1032,7 +1042,7 @@ namespace TEST
         public void ClearingLines()
         {
             Console.SetCursorPosition(0, Console.CursorTop - 1);
-            // Thread.Sleep(4500);
+            Thread.Sleep(4500);
             Console.Write(new string(' ', Console.BufferWidth));
             Console.SetCursorPosition(0, Console.CursorTop);
         }
