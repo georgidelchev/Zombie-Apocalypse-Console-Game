@@ -18,18 +18,17 @@ namespace TEST
 
             welcomeInfo.WelcomeInfo();
             player.PlayerName(); // message to enter your name 
-            
+
 
             Console.WriteLine($"{Player.playerName} press any key to continue!");
             Console.ReadKey();
             clr.ClearingLines();
             Console.Clear();
-            
+
             //Thread.Sleep(2000); // 2 seconds of sleep
             Console.WriteLine($"Hello {Player.playerName}! Nice to meet you!"); // hello message
             Console.WriteLine(); // empty line
-            
-            player.PlayerWeapon(); // picking starting weapon
+
             fighting.Fight(); // whole fight logic
             gameOver.Over(); // when game is over statistics,info etc..
         }
@@ -210,6 +209,8 @@ namespace TEST
     public class PlayerHelper
     {
         public static bool isPlayerHaveKidHelper = false;
+        public static bool isPlayerHaveDogHelper = false;
+
         public void KidHelper()
         {
             Console.WriteLine($"An little kid is being chased by two zombies..." +
@@ -240,6 +241,8 @@ namespace TEST
                     Console.WriteLine("He wants to be your partner in this journey!");
                     Console.WriteLine("He's name is Will.");
                     isPlayerHaveKidHelper = true;
+                    Kid kid = new Kid();
+                    kid.KidWeapon();
                 }
 
             }
@@ -279,6 +282,24 @@ namespace TEST
                 //Thread.Sleep(1500);
                 Console.WriteLine($"Think about it next time {Player.playerName}.");
                 Console.WriteLine();
+            }
+        }
+        public void DogHelper()
+        {
+            Console.WriteLine($"The dog is appreciated to you {Player.playerName} !");
+            int chanceToFollowThePlayer = new Random().Next(1, 4);
+            switch (chanceToFollowThePlayer)
+            {
+                case 1:
+                case 2:
+                    Console.WriteLine($"Sorry , but the dog ran away {Player.playerName} !");
+                    break;
+                case 3:
+                case 4:
+                    Console.WriteLine($"{Player.playerName} the dog obviously decided to follow you in the journey!");
+                    Console.WriteLine("He likes you very much :)) !");
+                    isPlayerHaveDogHelper = true;
+                    break;
             }
         }
     }
@@ -712,6 +733,30 @@ namespace TEST
                                     {
                                         Console.WriteLine("Without any injuries.");
                                     }
+
+                                    if (PlayerHelper.isPlayerHaveDogHelper == false)
+                                    {
+                                        Console.WriteLine($"There is something next to you {Player.playerName}???");
+                                        //Thread.Sleep(2000);
+                                        Console.WriteLine($"An a DOG!");
+                                        Console.WriteLine("Is this your new friend in this journey?");
+                                        Console.WriteLine($"Do you want to feed him {Player.playerName}?");
+                                        int feedChoice = int.Parse(Console.ReadLine());
+                                        Console.WriteLine("[0] FEED");
+                                        Console.WriteLine("[1] DONT FEED");
+
+                                        if (feedChoice == 0)
+                                        {
+                                            Console.WriteLine(">.< ...");
+                                        }
+                                        else if (feedChoice == 1)
+                                        {
+                                            Player.playerFood -= 10;
+                                            PlayerHelper hlp = new PlayerHelper();
+                                            hlp.DogHelper();
+                                        }
+                                    }
+
                                     break;
                                 case 3:
                                 case 4:
@@ -752,9 +797,13 @@ namespace TEST
                                         Console.WriteLine("Without any injuries.");
                                     }
 
-                                    Console.WriteLine($"There is someone {Player.playerName}!!!");
-                                    PlayerHelper playerHelper = new PlayerHelper();
-                                    playerHelper.KidHelper();
+                                    if (PlayerHelper.isPlayerHaveKidHelper == false)
+                                    {
+                                        Console.WriteLine($"There is someone {Player.playerName}!!!");
+                                        PlayerHelper playerHelper = new PlayerHelper();
+                                        playerHelper.KidHelper();
+                                    }
+
                                     break;
                             }
                             if (Player.playerHealth <= 0)
@@ -1042,7 +1091,7 @@ namespace TEST
         public void ClearingLines()
         {
             Console.SetCursorPosition(0, Console.CursorTop - 1);
-            Thread.Sleep(4500);
+            //Thread.Sleep(4500);
             Console.Write(new string(' ', Console.BufferWidth));
             Console.SetCursorPosition(0, Console.CursorTop);
         }
