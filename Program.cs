@@ -8,15 +8,15 @@ namespace TEST
     {
         public static void Main(string[] args)
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-
+            Console.ForegroundColor = ConsoleColor.Cyan; // making console text color in cyan
+            
             Player player = new Player();
             BeginningInformation welcomeInfo = new BeginningInformation();
             Fighting fighting = new Fighting();
             GameOver gameOver = new GameOver();
 
             welcomeInfo.WelcomeInfo();
-            Console.Write(">> ");
+            
             player.PlayerName(); // message to enter your name 
             //Thread.Sleep(2000); // 2 seconds of sleep
             Console.WriteLine($"Hello {Player.playerName}! Nice to meet you!"); // hello message
@@ -34,6 +34,11 @@ namespace TEST
         {
             Console.Write("Please enter your name: ");
             Console.WriteLine();
+            Console.Write(">> ");
+        }
+        public void Information()
+        {
+            // TODO ADD INFORMATION
         }
         public void Story()
         {
@@ -48,6 +53,7 @@ namespace TEST
         // PLAYER STATS
         public static string playerName;  // the name of the Player       
         public static double playerFood = 10;  // amount of food that Player have
+        public static double playerHunger = 100;
         public static double playerHealth = 250; // health of the player
         public static string playerGear;  // current Player gear
         public static double playerCoins = 25; // current Player coins
@@ -78,6 +84,7 @@ namespace TEST
 
 
         public static double weaponClassCheck = 0;
+        double maxClass = double.MinValue;
         public void PlayerName()
         {
             playerName = Console.ReadLine(); // entering the name of the Player
@@ -122,7 +129,7 @@ namespace TEST
                 weaponClass = "[10/10]";
                 weaponClassCheck = 10;
             }
-            double maxClass = double.MinValue;
+
             if (weaponClassCheck > maxClass)
             {
                 maxClass = weaponClassCheck;
@@ -141,7 +148,7 @@ namespace TEST
         public static double kidCoins = 50; // current Kid coins
 
         public static int kidWeapon;
-       
+
 
         public static string currentKidHelmet = string.Empty;
         public static string currentKidChestplate = string.Empty;
@@ -286,7 +293,7 @@ namespace TEST
             zombieType = "Common Zombie";
             zombieDamage = 10;
             zombieHealth = 20;
-        }        
+        }
         public void LittleZombie()
         {
             zombieType = "Little Zombie";
@@ -342,10 +349,12 @@ namespace TEST
         {
             Shop shop = new Shop();
             ZombiesTypes zombieTypes = new ZombiesTypes();
+            Player playerWeapon = new Player();
             ClearingLine clearing = new ClearingLine();
 
             while (isPlayerAlive)
             {
+                playerWeapon.PlayerWeapon();
                 shopCounter++;
                 if (shopCounter % 3 == 0)
                 {
@@ -400,6 +409,57 @@ namespace TEST
 
                 while (isPlayerAlive && !isPlayerWinner)
                 {
+                    if (Player.playerHunger <= 30)
+                    {
+                        Console.WriteLine($"Consume some food {Player.playerName}?" +
+                        $"{Environment.NewLine}Your hunger bar is : {Player.playerHunger}/100");
+                        Console.WriteLine($"{Player.playerName} you have {Player.playerFood} food");
+                        Console.WriteLine($"[0] - CONSUME");
+                        Console.WriteLine($"[1] - DONT CONSUME");
+                        Console.Write(">> ");
+                        int eating = int.Parse(Console.ReadLine());
+                        while (eating < 0 || eating > 1)
+                        {
+                            Console.WriteLine($"Please enter an valid operation-{Player.playerName}! :");
+                            Console.Write(">> ");
+                            eating = int.Parse(Console.ReadLine());
+                        }
+                        if (eating == 0)
+                        {
+                            if (Player.playerFood <= 0)
+                            {
+                                Console.WriteLine($"{Player.playerName} you dont have enought food. Find somewhere fast!");
+                            }
+                            else
+                            {
+                                if (Player.playerFood + Player.playerHunger > 100)
+                                {
+                                    double leftFood = Player.playerFood - (100 - Player.playerHunger);
+
+                                    Player.playerHunger = 100;
+
+                                    Player.playerFood = leftFood;
+
+                                    Console.WriteLine($"{Player.playerName} you fed yourself.");
+                                    Console.WriteLine($"Hunger bar: {Player.playerHunger}/100");
+                                    Console.WriteLine($"Left Food: {leftFood}");
+                                }
+                                else
+                                {
+                                    Player.playerHunger += Player.playerFood;
+                                    Player.playerFood = 0;
+                                    Console.WriteLine($"{Player.playerName} you didn't fed yourself , you need a little more food.");
+                                    Console.WriteLine("Please find somewhere!");
+                                    Console.WriteLine($"Hunger bar: {Player.playerHunger}/100");
+                                    Console.WriteLine($"Food left: {Player.playerFood}");
+                                }
+
+                            }
+                            Console.WriteLine($"{Player.playerName} you just consumed 10 Food" +
+                                $"{Environment.NewLine}Hunger bar: {Player.playerHunger}/100");
+                        }
+                    }
+
                     Console.WriteLine($"Weapon: [{Player.currentWeapon}] | " +
                                               $"{ Environment.NewLine}" +
                                               $"Helmet: [{Player.currentHelmet}] | " +
@@ -408,7 +468,8 @@ namespace TEST
                                               $"Boots: [{Player.currentBoots}]");
                     Console.WriteLine();
 
-                    Console.WriteLine($" Player LVL: [{Player.playerLevel}]  -  EXP: [{Player.playerExp}/100]                                                            ");
+                    Console.WriteLine($"Player LVL: [{Player.playerLevel}]  -  EXP: [{Player.playerExp}/100]                                                            ");
+                    Console.WriteLine($"Hunger: {Player.playerHunger}/100  -  Current Food: {Player.playerFood}");
                     Console.WriteLine($"╔════════════════════════════════╗           ║Current Health: [{Player.playerHealth}]      ");
                     Console.WriteLine($"║#=# Choose an action to  do: #=#║           ║Current Deffence: [{Player.playerDeffence}]   ");
                     Console.WriteLine($"║════════════════════════════════║           ║Current Damage: [{Player.weaponDamage}]      ");
@@ -424,6 +485,7 @@ namespace TEST
                         Console.WriteLine($"                     Please enter an valid operation-{Player.playerName}! :");
                         Console.WriteLine();
                         Console.WriteLine($" Player LVL: [{Player.playerLevel}]  -  EXP: [{Player.playerExp}/100]                                                            ");
+                        Console.WriteLine($"Hunger: {Player.playerHunger}/100  -  Current Food: {Player.playerFood}");
                         Console.WriteLine($"╔════════════════════════════════╗           ║Current Health: [{Player.playerHealth}]      ");
                         Console.WriteLine($"║#=# Choose an action to  do: #=#║           ║Current Deffence: [{Player.playerDeffence}]   ");
                         Console.WriteLine($"║════════════════════════════════║           ║Current Damage: [{Player.weaponDamage}]      ");
@@ -434,7 +496,7 @@ namespace TEST
                         actionToDo = int.Parse(Console.ReadLine());
                         Console.WriteLine();
                     }
-                    
+
                     double diff = 0;
                     if (actionToDo == 0) // fighting with the zombies
                     {
@@ -468,15 +530,14 @@ namespace TEST
                                     $"{Environment.NewLine}successfully {ZombiesTypes.zombieType}.");
                                 Console.WriteLine();
                                 Console.WriteLine($"{Player.playerName} your reward is:");
-                                Console.WriteLine($"+10 Food");
+                                Console.WriteLine($"+30 Food");
                                 Console.WriteLine($"+10 Health");
-                                Console.WriteLine($"+5 Attack");
-                                Console.WriteLine($"+10 Exp");
+                                Console.WriteLine($"+20 Exp");
                                 Console.WriteLine($"+25 Coins");
-                                Player.playerFood += 10;
+
+                                Player.playerFood += 30;
                                 Player.playerHealth += 10;
-                                Player.weaponDamage += 5;
-                                Player.playerExp += 10;
+                                Player.playerExp += 20;
                                 Player.playerCoins += 25;
 
                                 if (Player.playerExp >= 100)
@@ -493,17 +554,47 @@ namespace TEST
                                     Console.WriteLine();
 
                                     Player.playerLevel++;
-                                    Player.weaponDamage += 5;
                                     Player.playerHealth += 10;
                                     Player.playerExp -= 100;
                                     Player.playerCoins += 10;
+                                    Player.playerFood += 50;
+                                    Player.weaponDamage += 15;
 
                                     Console.WriteLine($"New Level : {Player.currentPlayerLevel} -> {Player.playerLevel}");
                                     Player.currentPlayerLevel = Player.playerLevel;
                                 }
                                 isPlayerWinner = true;
                             }
+                            int takingHunger = new Random().Next(1, 6);
+                            switch (takingHunger) // average hunger when he is fighting
+                            {
+                                case 1:
+                                    Player.playerHunger -= 2;
+                                    break;
+                                case 2:
+                                    Player.playerHunger -= 4;
+                                    break;
+                                case 3:
+                                    Player.playerHunger -= 6;
+                                    break;
+                                case 4:
+                                    Player.playerHunger -= 8;
+                                    break;
+                                case 5:
+                                    Player.playerHunger -= 10;
+                                    break;
+                                case 6:
+                                    Player.playerHunger -= 12;
+                                    break;
+                            }
 
+
+                            if (Player.playerHunger < 0)
+                            {
+                                Player.playerHealth -= 5;
+                                Console.WriteLine($"{Player.playerName} you are hungry! Eat some food");
+                                Console.WriteLine("-5 HP");
+                            }
                         }
                     }
                     else if (actionToDo == 1) // running away
@@ -512,8 +603,7 @@ namespace TEST
                         if (didPlayerTookDamage == 1 || didPlayerTookDamage == 2)
                         {
                             Console.WriteLine($"{Player.playerName} ran away from these successfully " +
-                                "without taking any damage!");
-                            break;
+                               "without taking any damage!");
                         }
                         else if (didPlayerTookDamage == 3 || didPlayerTookDamage == 4)
                         {
@@ -528,15 +618,76 @@ namespace TEST
                             isPlayerAlive = false;
                             break;
                         }
+
+                        int takingHunger = new Random().Next(1, 6);
+                        switch (takingHunger) // more food when he runs
+                        {
+                            case 1:
+                                Player.playerHunger -= 5;
+                                break;
+                            case 2:
+                                Player.playerHunger -= 8;
+                                break;
+                            case 3:
+                                Player.playerHunger -= 10;
+                                break;
+                            case 4:
+                                Player.playerHunger -= 13;
+                                break;
+                            case 5:
+                                Player.playerHunger -= 15;
+                                break;
+                            case 6:
+                                Player.playerHunger -= 20;
+                                break;
+                        }
+                        
+                        if (Player.playerHunger < 0)
+                        {
+                            Player.playerHealth -= 5;
+                            Console.WriteLine($"{Player.playerName} you are hungry! Eat some food");
+                            Console.WriteLine("-5 HP");
+                        }
                         break;
                     }
                     else if (actionToDo == 2) // hiding somewhere
                     {
                         int didPlayerHided = new Random().Next(1, 4);
-                        if (didPlayerHided == 1 || didPlayerHided == 2)
+                        if (didPlayerHided == 1 || didPlayerHided == 2 || didPlayerHided == 3 || didPlayerHided == 4)
                         {
                             int wherePlayerHided = new Random().Next(1, 8);
                             int didHeTookDamage = new Random().Next(1, 4);
+
+                            int takingHunger = new Random().Next(1, 6);
+                            switch (takingHunger) // less food when he is hiding
+                            {
+                                case 1:
+                                    Player.playerHunger -= 1;
+                                    break;
+                                case 2:
+                                    Player.playerHunger -= 2;
+                                    break;
+                                case 3:
+                                    Player.playerHunger -= 4;
+                                    break;
+                                case 4:
+                                    Player.playerHunger -= 6;
+                                    break;
+                                case 5:
+                                    Player.playerHunger -= 7;
+                                    break;
+                                case 6:
+                                    Player.playerHunger -= 8;
+                                    break;
+                            }
+                            
+                            if (Player.playerHunger < 0)
+                            {
+                                Player.playerHealth -= 5;
+                                Console.WriteLine($"{Player.playerName} you are hungry! Eat some food");
+                                Console.WriteLine("-5 HP");
+                            }
+
                             switch (wherePlayerHided)
                             {
                                 case 1:
@@ -590,7 +741,7 @@ namespace TEST
                                     {
                                         Console.WriteLine("Without any injuries.");
                                     }
-                                    
+
                                     Console.WriteLine($"There is someone {Player.playerName}!!!");
                                     PlayerHelper playerHelper = new PlayerHelper();
                                     playerHelper.KidHelper();
@@ -602,6 +753,8 @@ namespace TEST
                                 isPlayerAlive = false;
                                 break;
                             }
+
+
 
                         }
                     }
@@ -869,7 +1022,7 @@ namespace TEST
                         }
 
                     }
-                  break;
+                    break;
             }
         }
 
