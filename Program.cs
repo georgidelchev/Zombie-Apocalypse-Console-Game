@@ -141,7 +141,7 @@ namespace TEST
         public static double kidCoins = 50; // current Kid coins
 
         public static int kidWeapon;
-        public static bool isPlayerHaveKidHelper = false;
+       
 
         public static string currentKidHelmet = string.Empty;
         public static string currentKidChestplate = string.Empty;
@@ -193,6 +193,10 @@ namespace TEST
             currentKidWeapon = kidWeaponName;
             kidWeapon = 0;
         }
+    }
+    public class PlayerHelper
+    {
+        public static bool isPlayerHaveKidHelper = false;
         public void KidHelper()
         {
             Console.WriteLine($"An little kid is being chased by two zombies..." +
@@ -430,8 +434,9 @@ namespace TEST
                         actionToDo = int.Parse(Console.ReadLine());
                         Console.WriteLine();
                     }
+                    
                     double diff = 0;
-                    if (actionToDo == 0)
+                    if (actionToDo == 0) // fighting with the zombies
                     {
                         while (isPlayerAlive && !isPlayerWinner)
                         {
@@ -497,6 +502,105 @@ namespace TEST
                                     Player.currentPlayerLevel = Player.playerLevel;
                                 }
                                 isPlayerWinner = true;
+                            }
+
+                        }
+                    }
+                    else if (actionToDo == 1) // running away
+                    {
+                        int didPlayerTookDamage = new Random().Next(1, 4);
+                        if (didPlayerTookDamage == 1 || didPlayerTookDamage == 2)
+                        {
+                            Console.WriteLine($"{Player.playerName} ran away from these successfully " +
+                                "without taking any damage!");
+                            break;
+                        }
+                        else if (didPlayerTookDamage == 3 || didPlayerTookDamage == 4)
+                        {
+                            Player.playerHealth -= ZombiesTypes.zombieDamage / 2;
+                            double took = ZombiesTypes.zombieDamage / 2;
+                            Console.WriteLine($"Oh {Player.playerName}.... you were too slow..");
+                            Console.WriteLine($"You took {took} damage.");
+                        }
+                        if (Player.playerHealth <= 0)
+                        {
+                            Console.WriteLine($"Sorry {Player.playerName} .. you are dead.");
+                            isPlayerAlive = false;
+                            break;
+                        }
+                        break;
+                    }
+                    else if (actionToDo == 2) // hiding somewhere
+                    {
+                        int didPlayerHided = new Random().Next(1, 4);
+                        if (didPlayerHided == 1 || didPlayerHided == 2)
+                        {
+                            int wherePlayerHided = new Random().Next(1, 8);
+                            int didHeTookDamage = new Random().Next(1, 4);
+                            switch (wherePlayerHided)
+                            {
+                                case 1:
+                                case 2:
+                                    Console.WriteLine($"{Player.playerName} you just hided in the bushes.");
+                                    if (didHeTookDamage == 1 || didHeTookDamage == 2)
+                                    {
+                                        Console.WriteLine($"With minor injuries -10 health.");
+                                        Player.playerHealth -= 10;
+                                    }
+                                    else if (didHeTookDamage == 3 || didHeTookDamage == 4)
+                                    {
+                                        Console.WriteLine("Without any injuries.");
+                                    }
+                                    break;
+                                case 3:
+                                case 4:
+                                    Console.WriteLine($"{Player.playerName} you just hided behind a car.");
+                                    if (didHeTookDamage == 1 || didHeTookDamage == 2)
+                                    {
+                                        Console.WriteLine($"With minor injuries -10 health.");
+                                        Player.playerHealth -= 10;
+                                    }
+                                    else if (didHeTookDamage == 3 || didHeTookDamage == 4)
+                                    {
+                                        Console.WriteLine("Without any injuries.");
+                                    }
+                                    break;
+                                case 5:
+                                case 6:
+                                    Console.WriteLine($"{Player.playerName} you just hided in a shop.");
+                                    if (didHeTookDamage == 1 || didHeTookDamage == 2)
+                                    {
+                                        Console.WriteLine($"With minor injuries -10 health.");
+                                        Player.playerHealth -= 10;
+                                    }
+                                    else if (didHeTookDamage == 3 || didHeTookDamage == 4)
+                                    {
+                                        Console.WriteLine("Without any injuries.");
+                                    }
+                                    break;
+                                case 7:
+                                case 8:
+                                    Console.WriteLine($"{Player.playerName} you just hided in a house.");
+                                    if (didHeTookDamage == 1 || didHeTookDamage == 2)
+                                    {
+                                        Console.WriteLine($"With minor injuries -10 health.");
+                                        Player.playerHealth -= 10;
+                                    }
+                                    else if (didHeTookDamage == 3 || didHeTookDamage == 4)
+                                    {
+                                        Console.WriteLine("Without any injuries.");
+                                    }
+                                    
+                                    Console.WriteLine($"There is someone {Player.playerName}!!!");
+                                    PlayerHelper playerHelper = new PlayerHelper();
+                                    playerHelper.KidHelper();
+                                    break;
+                            }
+                            if (Player.playerHealth <= 0)
+                            {
+                                Console.WriteLine($"Sorry {Player.playerName} .. you are dead.");
+                                isPlayerAlive = false;
+                                break;
                             }
 
                         }
