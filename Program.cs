@@ -188,7 +188,7 @@ namespace TEST
         public static string zombieType = string.Empty;     // the type of the Zombie
         public static double zombieDamage = 0;                 // damage of the Zombie
         public static double zombieHealth = 0;                 // health of the Zombie
-
+        public static bool isPlayerHaveKidHelper = false;
         public void BabyZombie()
         {
             zombieType = "Baby Zombie";
@@ -200,6 +200,77 @@ namespace TEST
             zombieType = "Common Zombie";
             zombieDamage = 10;
             zombieHealth = 20;
+        }
+        public void Kid()
+        {
+            Console.WriteLine($"An little kid is being chased by two zombies..." +
+                            $"{Environment.NewLine}What will you do {Player.playerName} ?");
+            Console.WriteLine("[0] Save him!");
+            Console.WriteLine("[1] Leave him alone...");
+            Console.Write(">> ");
+            int choice = int.Parse(Console.ReadLine());
+            while (choice < 0 || choice > 1)
+            {
+                Console.WriteLine($"Please enter an valid operation-{Player.playerName}! :");
+                Console.Write(">> ");
+                choice = int.Parse(Console.ReadLine());
+            }
+            if (choice == 0)
+            {
+                Console.WriteLine($"Good job {Player.playerName}.");
+                Console.WriteLine($"An little reward for the hero: +5 food.");
+                Player.playerFood += 5;
+                int chanceToGetKidHelper = new Random().Next(1, 100);
+                if (chanceToGetKidHelper >= 1 && chanceToGetKidHelper <= 96) // 98% chance to not have a helper                               
+                {
+
+                }
+                else if (chanceToGetKidHelper >= 97 && chanceToGetKidHelper <= 99) // 3% chance to have helper
+                {
+                    Console.WriteLine("The kid is soo appreciated!");
+                    Console.WriteLine("He wants to be your partner in this journey!");
+                    Console.WriteLine("He's name is Will.");
+                    isPlayerHaveKidHelper = true;
+                }
+
+            }
+            else if (choice == 1)
+            {
+                Console.WriteLine($"I'm very dissapointed {Player.playerName} ...");
+                //Thread.Sleep(2000);
+                Console.WriteLine("How can you leave him ...");
+                //Thread.Sleep(3000);
+                int minusRandomFood = new Random().Next(1, 5);
+                int lostFood = 0;
+                switch (minusRandomFood)
+                {
+                    case 1:
+                        Player.playerFood -= 4;
+                        lostFood = 4;
+                        break;
+                    case 2:
+                        Player.playerFood -= 6;
+                        lostFood = 6;
+                        break;
+                    case 3:
+                        Player.playerFood -= 8;
+                        lostFood = 8;
+                        break;
+                    case 4:
+                        Player.playerFood -= 10;
+                        lostFood = 10;
+                        break;
+                    case 5:
+                        Player.playerFood -= 12;
+                        lostFood = 12;
+                        break;
+                }
+                Console.WriteLine($"{Player.playerName} you lost {lostFood} food for this...");
+                Player.playerFood -= lostFood;
+                //Thread.Sleep(1500);
+                Console.WriteLine($"Think about it next time {Player.playerName}.");
+                Console.WriteLine();
+            }
         }
         public void LittleZombie()
         {
@@ -248,17 +319,16 @@ namespace TEST
     public class Fighting
     {
         public static int actionType = 0;
-        public static bool isPlayerHaveKidHelper = false;
+        //public static bool isPlayerHaveKidHelper = false;
         public static bool isPlayerAlive = true;
         public static int shopCounter = 0;
 
         public void Fight()
         {
             Shop shop = new Shop();
-
-
             ZombiesTypes zombieTypes = new ZombiesTypes();
             ClearingLine clearing = new ClearingLine();
+
             while (isPlayerAlive)
             {
                 shopCounter++;
@@ -266,86 +336,15 @@ namespace TEST
                 {
                     shop.ShopMenu();
                 }
-                if (isPlayerHaveKidHelper == false)
-                {
-                    actionType = new Random().Next(1, 10);
-                }
-                else
-                {
-                    actionType = new Random().Next(2, 10);
-                }
+
+                actionType = new Random().Next(1, 9);
+
+
                 bool isPlayerWinner = false;
                 switch (actionType)
                 {
                     case 1:
-                        Console.WriteLine($"An little kid is being chased by two zombies..." +
-                            $"{Environment.NewLine}What will you do {Player.playerName} ?");
-                        Console.WriteLine("[0] Save him!");
-                        Console.WriteLine("[1] Leave him alone...");
-                        Console.Write(">> ");
-                        int choice = int.Parse(Console.ReadLine());
-                        while (choice < 0 || choice > 1)
-                        {
-                            Console.WriteLine($"Please enter an valid operation-{Player.playerName}! :");
-                            Console.Write(">> ");
-                            choice = int.Parse(Console.ReadLine());
-                        }
-                        if (choice == 0)
-                        {
-                            Console.WriteLine($"Good job {Player.playerName}.");
-                            Console.WriteLine($"An little reward for the hero: +5 food.");
-                            Player.playerFood += 5;
-                            int chanceToGetKidHelper = new Random().Next(1, 100);
-                            if (chanceToGetKidHelper >= 1 && chanceToGetKidHelper <= 96) // 98% chance to not have a helper                               
-                            {
-                                continue;
-                            }
-                            else if (chanceToGetKidHelper >= 97 && chanceToGetKidHelper <= 99) // 3% chance to have helper
-                            {
-                                Console.WriteLine("The kid is soo appreciated!");
-                                Console.WriteLine("He wants to be your partner in this journey!");
-                                Console.WriteLine("He's name is Will.");
-                                isPlayerHaveKidHelper = true;
-                            }
-
-                        }
-                        else if (choice == 1)
-                        {
-                            Console.WriteLine($"I'm very dissapointed {Player.playerName} ...");
-                            //Thread.Sleep(2000);
-                            Console.WriteLine("How can you leave him ...");
-                            //Thread.Sleep(3000);
-                            int minusRandomFood = new Random().Next(1, 5);
-                            int lostFood = 0;
-                            switch (minusRandomFood)
-                            {
-                                case 1:
-                                    Player.playerFood -= 4;
-                                    lostFood = 4;
-                                    break;
-                                case 2:
-                                    Player.playerFood -= 6;
-                                    lostFood = 6;
-                                    break;
-                                case 3:
-                                    Player.playerFood -= 8;
-                                    lostFood = 8;
-                                    break;
-                                case 4:
-                                    Player.playerFood -= 10;
-                                    lostFood = 10;
-                                    break;
-                                case 5:
-                                    Player.playerFood -= 12;
-                                    lostFood = 12;
-                                    break;
-                            }
-                            Console.WriteLine($"{Player.playerName} you lost {lostFood} food for this...");
-                            Player.playerFood -= lostFood;
-                            //Thread.Sleep(1500);
-                            Console.WriteLine($"Think about it next time {Player.playerName}.");
-                            Console.WriteLine();
-                        }
+                        zombieTypes.ZombieBoss();
                         break;
                     case 2:
                         zombieTypes.BabyZombie();
@@ -370,9 +369,6 @@ namespace TEST
                         break;
                     case 9:
                         zombieTypes.ZombieWithKnife();
-                        break;
-                    case 10:
-                        zombieTypes.ZombieBoss();
                         break;
 
                 } // Under working !
