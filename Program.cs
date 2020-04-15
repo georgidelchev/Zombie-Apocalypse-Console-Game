@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 
+
 namespace TEST
 {
     public class Program
@@ -27,7 +28,6 @@ namespace TEST
             gameOver.Over();
         }
     }
-
     public class BeginningInformation
     {
         public void WelcomeInfo()
@@ -43,7 +43,6 @@ namespace TEST
             Console.WriteLine(Player.playerFood -= 5); // testing
         }
     }
-
     public class Player
     {
         // PLAYER STATS
@@ -66,7 +65,7 @@ namespace TEST
         // WEAPON STATS
         public static string currentWeapon = string.Empty; // current weapon of the Player
         public static string weaponName; // the name of the weapon
-        public static double weaponDamage = 25; // the damage of the weapon
+        public static double weaponDamage; // the damage of the weapon
         public static string weaponClass; // the quality class of the weapon
 
 
@@ -77,6 +76,8 @@ namespace TEST
 
         public static string[] weapons = { "Shotgun", "M4", "Machete" };
 
+
+        public static double weaponClassCheck = 0;
         public void PlayerName()
         {
             playerName = Console.ReadLine(); // entering the name of the Player
@@ -89,35 +90,45 @@ namespace TEST
             if (playerWeapon >= 1 && playerWeapon <= 39) // 40% drop chance
             {
                 weaponName = "Pan";
-                weaponDamage += 3;
+                weaponDamage = 35;
                 weaponClass = "[2/10]";
+                weaponClassCheck = 2;
             }
             else if (playerWeapon >= 40 && playerWeapon <= 59) // 20% drop chance
             {
                 weaponName = "Stone Axe";
-                weaponDamage += 5;
+                weaponDamage = 40;
                 weaponClass = "[3.5/10]";
+                weaponClassCheck = 3.5;
             }
             else if (playerWeapon >= 60 && playerWeapon <= 79) // 20% drop chance
             {
                 weaponName = "Iron Pickaxe";
-                weaponDamage += 7;
+                weaponDamage = 45;
                 weaponClass = "[5.5/10]";
+                weaponClassCheck = 5.5;
             }
             else if (playerWeapon >= 80 && playerWeapon <= 91) // 12% drop chance
             {
                 weaponName = "Gun";
-                weaponDamage += 10;
+                weaponDamage = 65;
                 weaponClass = "[7.5/10]";
+                weaponClassCheck = 7.5;
             }
             else if (playerWeapon >= 92 && playerWeapon <= 99) // 8% drop chance
             {
                 weaponName = "AK-47";
-                weaponDamage += 15;
+                weaponDamage = 100;
                 weaponClass = "[10/10]";
+                weaponClassCheck = 10;
             }
-            currentWeapon = weaponName;
-            playerWeapon = 0;
+            double maxClass = double.MinValue;
+            if (weaponClassCheck > maxClass)
+            {
+                maxClass = weaponClassCheck;
+                currentWeapon = weaponName;
+            }
+
         }
 
     }
@@ -130,6 +141,7 @@ namespace TEST
         public static double kidCoins = 50; // current Kid coins
 
         public static int kidWeapon;
+        public static bool isPlayerHaveKidHelper = false;
 
         public static string currentKidHelmet = string.Empty;
         public static string currentKidChestplate = string.Empty;
@@ -181,27 +193,7 @@ namespace TEST
             currentKidWeapon = kidWeaponName;
             kidWeapon = 0;
         }
-    }
-    public class ZombiesTypes
-    {
-        // ZOMBIES STATS
-        public static string zombieType = string.Empty;     // the type of the Zombie
-        public static double zombieDamage = 0;                 // damage of the Zombie
-        public static double zombieHealth = 0;                 // health of the Zombie
-        public static bool isPlayerHaveKidHelper = false;
-        public void BabyZombie()
-        {
-            zombieType = "Baby Zombie";
-            zombieDamage = 5;
-            zombieHealth = 10;
-        }
-        public void CommonZombie()
-        {
-            zombieType = "Common Zombie";
-            zombieDamage = 10;
-            zombieHealth = 20;
-        }
-        public void Kid()
+        public void KidHelper()
         {
             Console.WriteLine($"An little kid is being chased by two zombies..." +
                             $"{Environment.NewLine}What will you do {Player.playerName} ?");
@@ -272,6 +264,25 @@ namespace TEST
                 Console.WriteLine();
             }
         }
+    }
+    public class ZombiesTypes
+    {
+        // ZOMBIES STATS
+        public static string zombieType = string.Empty;     // the type of the Zombie
+        public static double zombieDamage = 0;                 // damage of the Zombie
+        public static double zombieHealth = 0;                 // health of the Zombie       
+        public void BabyZombie()
+        {
+            zombieType = "Baby Zombie";
+            zombieDamage = 5;
+            zombieHealth = 10;
+        }
+        public void CommonZombie()
+        {
+            zombieType = "Common Zombie";
+            zombieDamage = 10;
+            zombieHealth = 20;
+        }        
         public void LittleZombie()
         {
             zombieType = "Little Zombie";
@@ -456,12 +467,12 @@ namespace TEST
                                 Console.WriteLine($"+10 Health");
                                 Console.WriteLine($"+5 Attack");
                                 Console.WriteLine($"+10 Exp");
-                                Console.WriteLine($"+10 Coins");
+                                Console.WriteLine($"+25 Coins");
                                 Player.playerFood += 10;
                                 Player.playerHealth += 10;
                                 Player.weaponDamage += 5;
                                 Player.playerExp += 10;
-                                Player.playerCoins += 10;
+                                Player.playerCoins += 25;
 
                                 if (Player.playerExp >= 100)
                                 {
@@ -527,7 +538,7 @@ namespace TEST
             {
                 case 0:
                     Console.WriteLine("[0] - ARMORS");
-                    Console.WriteLine("[1] - GUNS");
+                    Console.WriteLine("[1] - WEAPONS");
                     Console.WriteLine("[2] - EXIT");
                     Console.Write(">> ");
 
@@ -543,10 +554,10 @@ namespace TEST
 
                         Console.WriteLine("What you want to buy?");
                         Console.WriteLine();
-                        Console.WriteLine($"      ╔════════════════════╗");
+                        Console.WriteLine($"      ╔══════════════════════╗");
                         Console.WriteLine($"      ║ Current gold: " +
-                                                    $"{Player.playerCoins}   ║");
-                        Console.WriteLine($"      ╚════════════════════╝");
+                                                    $"{Player.playerCoins}     ║");
+                        Console.WriteLine($"      ╚══════════════════════╝");
                         Console.WriteLine($"╔════════════════════════════════╗");
                         Console.WriteLine($"║       #=# ARMORS MENU #=#      ║");
                         Console.WriteLine($"║════════════════════════════════║");
@@ -581,10 +592,14 @@ namespace TEST
                             if (Player.playerCoins >= 500)
                             {
                                 Player.playerCoins -= 500;
-                                Console.WriteLine($"{Player.playerName} you just bought an Iron Armor" +
-                                    $"for 500 Coins" +
-                                    $"{Environment.NewLine}You have: +35 deff and + 25 hp.");
+                                Console.Write($"{Player.playerName} you just bought an Iron Armor for");
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write($" 500 Coins");
+                                Console.ResetColor();
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.WriteLine($"{Environment.NewLine}You have: +35 deff and + 25 hp.");
                                 Player.playerHealth += 25;
+                                Player.playerDeffence += 35;
                                 Player.currentHelmet = Player.ironArmor[0];
                                 Player.currentChestplate = Player.ironArmor[1];
                                 Player.currentPants = Player.ironArmor[2];
@@ -602,10 +617,14 @@ namespace TEST
                             if (Player.playerCoins >= 250)
                             {
                                 Player.playerCoins -= 250;
-                                Console.WriteLine($"{Player.playerName} you just bought an Chain Armor" +
-                                    $"for 250 Coins" +
-                                    $"{Environment.NewLine}You have: +18 deff and + 20 hp.");
+                                Console.Write($"{Player.playerName} you just bought an Chain Armor for");
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write($" 250 Coins");
+                                Console.ResetColor();
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.WriteLine($"{Environment.NewLine}You have: +18 deff and + 20 hp.");
                                 Player.playerHealth += 20;
+                                Player.playerDeffence += 18;
                                 Player.currentHelmet = Player.chainArmor[0];
                                 Player.currentChestplate = Player.chainArmor[1];
                                 Player.currentPants = Player.chainArmor[2];
@@ -623,10 +642,14 @@ namespace TEST
                             if (Player.playerCoins >= 100)
                             {
                                 Player.playerCoins -= 100;
-                                Console.WriteLine($"{Player.playerName} you just bought an Leather Armor" +
-                                    $"for 100 Coins" +
-                                    $"{Environment.NewLine}You have: +10 deff and + 10 hp.");
+                                Console.Write($"{Player.playerName} you just bought an Leather Armor for");
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write($" 100 Coins");
+                                Console.ResetColor();
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.Write($"{Environment.NewLine}You have: +10 deff and + 10 hp.");
                                 Player.playerHealth += 10;
+                                Player.playerDeffence += 10;
                                 Player.currentHelmet = Player.leatherArmor[0];
                                 Player.currentChestplate = Player.leatherArmor[1];
                                 Player.currentPants = Player.leatherArmor[2];
@@ -644,12 +667,12 @@ namespace TEST
                     {
                         Console.WriteLine("What you want to buy?");
                         Console.WriteLine();
-                        Console.WriteLine($"      ╔════════════════════╗");
+                        Console.WriteLine($"      ╔══════════════════════╗");
                         Console.WriteLine($"      ║ Current gold: " +
-                                                    $"{Player.playerCoins}   ║");
-                        Console.WriteLine($"      ╚════════════════════╝");
+                                                    $"{Player.playerCoins}     ║");
+                        Console.WriteLine($"      ╚══════════════════════╝");
                         Console.WriteLine($"╔════════════════════════════════╗");
-                        Console.WriteLine($"║       #=# SWORDS MENU #=#      ║");
+                        Console.WriteLine($"║      #=# WEAPONS MENU #=#      ║");
                         Console.WriteLine($"║════════════════════════════════║");
                         Console.WriteLine($"║[0] -  Shotgun - [200G]         ║");
                         Console.WriteLine($"║          [+10 dmg]             ║");
@@ -682,9 +705,12 @@ namespace TEST
                             if (Player.playerCoins >= 500)
                             {
                                 Player.playerCoins -= 500;
-                                Console.WriteLine($"{Player.playerName} you just bought an Machete" +
-                                    $"for 500 Coins" +
-                                    $"{Environment.NewLine}You have: +40 Attack.");
+                                Console.Write($"{Player.playerName} you just bought an Machete for");
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write($" 500 Coins");
+                                Console.ResetColor();
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.Write($"{Environment.NewLine}You have: +40 Attack.");
                                 Player.weaponDamage += 40;
                                 Player.currentWeapon = Player.weapons[2];
                             }
@@ -700,9 +726,12 @@ namespace TEST
                             if (Player.playerCoins >= 300)
                             {
                                 Player.playerCoins -= 300;
-                                Console.WriteLine($"{Player.playerName} you just bought an M4" +
-                                    $"for 300 Coins" +
-                                    $"{Environment.NewLine}You have: +15 Attack");
+                                Console.Write($"{Player.playerName} you just bought an M4 for");
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write($" 300 Coins");
+                                Console.ResetColor();
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.Write($"{Environment.NewLine}You have: +15 Attack");
                                 Player.weaponDamage += 15;
                                 Player.currentWeapon = Player.weapons[1];
                             }
@@ -718,9 +747,12 @@ namespace TEST
                             if (Player.playerCoins >= 200)
                             {
                                 Player.playerCoins -= 200;
-                                Console.WriteLine($"{Player.playerName} you just bought an Shotgun" +
-                                    $"for 200 Coins" +
-                                    $"{Environment.NewLine}You have: +10 Attack");
+                                Console.Write($"{Player.playerName} you just bought an Shotgun for");
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.Write($" 200 Coins");
+                                Console.ResetColor();
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.Write($"{Environment.NewLine}You have: +10 Attack");
                                 Player.weaponDamage += 10;
                                 Player.currentWeapon = Player.weapons[0];
                             }
@@ -733,10 +765,7 @@ namespace TEST
                         }
 
                     }
-
-
-
-                    break;
+                  break;
             }
         }
 
