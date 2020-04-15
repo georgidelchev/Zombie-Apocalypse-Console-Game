@@ -210,6 +210,9 @@ namespace TEST
     {
         public static bool isPlayerHaveKidHelper = false;
         public static bool isPlayerHaveDogHelper = false;
+        public static double dogDamage = 25;
+        public static double dogHealth = 100;
+        public static string dogName = "ReX";
 
         public void KidHelper()
         {
@@ -529,10 +532,21 @@ namespace TEST
                     }
 
                     double diff = 0;
+                    PlayerHelper helper = new PlayerHelper();
+                    helper.DogHelper();
                     if (actionToDo == 0) // fighting with the zombies
                     {
                         while (isPlayerAlive && !isPlayerWinner)
                         {
+                            if (PlayerHelper.isPlayerHaveKidHelper == true)
+                            {
+                                ZombiesTypes.zombieHealth -= Kid.kidWeaponDamage;
+                            }
+                            if (PlayerHelper.isPlayerHaveDogHelper == true)
+                            {
+                                ZombiesTypes.zombieHealth -= PlayerHelper.dogDamage;
+                            }
+
                             if (Player.playerDeffence > ZombiesTypes.zombieDamage)
                             {
                                 Player.playerDeffence -= ZombiesTypes.zombieDamage;
@@ -544,7 +558,15 @@ namespace TEST
 
                                 Player.playerHealth -= diff;
                             }
+
                             ZombiesTypes.zombieHealth -= Player.weaponDamage;
+                            PlayerHelper.dogHealth -= ZombiesTypes.zombieDamage / 2;
+                            if (PlayerHelper.dogHealth <= 0)
+                            {
+                                Console.WriteLine($"{Player.playerName} , {PlayerHelper.dogName} is dead...");
+                                PlayerHelper.isPlayerHaveDogHelper = false;
+                            }
+
                             if (Player.playerDeffence < 0)
                             {
                                 Player.playerDeffence = 0;
@@ -752,8 +774,7 @@ namespace TEST
                                         else if (feedChoice == 1)
                                         {
                                             Player.playerFood -= 10;
-                                            PlayerHelper hlp = new PlayerHelper();
-                                            hlp.DogHelper();
+                                            helper.DogHelper();
                                         }
                                     }
 
