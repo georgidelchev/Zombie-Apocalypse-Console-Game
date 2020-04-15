@@ -301,6 +301,7 @@ namespace TEST
                 case 4:
                     Console.WriteLine($"{Player.playerName} the dog obviously decided to follow you in the journey!");
                     Console.WriteLine("He likes you very much :)) !");
+                    Console.WriteLine($"{Player.playerName} you need to feed {dogName}!");
                     isPlayerHaveDogHelper = true;
                     break;
             }
@@ -538,8 +539,10 @@ namespace TEST
                     {
                         while (isPlayerAlive && !isPlayerWinner)
                         {
+                            
                             if (PlayerHelper.isPlayerHaveKidHelper == true)
                             {
+                                Player.playerFood -= 10; // feeding the dog!
                                 ZombiesTypes.zombieHealth -= Kid.kidWeaponDamage;
                             }
                             if (PlayerHelper.isPlayerHaveDogHelper == true)
