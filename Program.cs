@@ -815,6 +815,30 @@ namespace TEST
                                 $"{Environment.NewLine}Hunger bar: {Player.playerHunger}/100");
                         }
                     }
+
+                    if (PlayerHelper.isPlayerHaveAnCar == true)
+                    {
+                        Console.WriteLine($"{Player.playerName} you can take a ride to other city.");
+                        Console.WriteLine("Did you want to?");
+                        Console.WriteLine();
+                        Thread.Sleep(2000);
+
+                        Console.WriteLine();
+                        Console.WriteLine("[0] TAKE A RIDE");
+                        Console.WriteLine("[0] DONT");
+                        int rideChoice = int.Parse(Console.ReadLine());
+                        while (rideChoice < 0 || rideChoice > 1)
+                        {
+                            Console.WriteLine($"Please enter an valid operation-{Player.playerName}! :");
+                            rideChoice = int.Parse(Console.ReadLine());
+                        }
+                        
+                        if (rideChoice == 0)
+                        {
+                            Console.WriteLine($"{Player.playerName} you decided to take a ride!!");
+                        }
+                    }
+
                     Console.WriteLine();
                     Console.WriteLine($"Weapon: [{Player.currentWeapon}] | " +
                                               $"{ Environment.NewLine}" +
