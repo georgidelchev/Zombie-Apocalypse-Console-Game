@@ -1037,6 +1037,7 @@ namespace TEST
                                 Console.WriteLine($"+10 Health");
                                 Console.WriteLine($"+20 Exp");
                                 Console.WriteLine($"+25 Coins");
+                                Console.WriteLine($"+25 Fuel");
                                 Console.WriteLine();
                                 Thread.Sleep(2000);
 
@@ -1044,6 +1045,7 @@ namespace TEST
                                 Player.playerHealth += 10;
                                 Player.playerExp += 20;
                                 Player.playerCoins += 25;
+                                Player.fuel += 25;
 
                                 if (Player.playerExp >= 100)
                                 {
@@ -1063,6 +1065,7 @@ namespace TEST
                                     Player.playerExp -= 100;
                                     Player.playerCoins += 50;
                                     Player.playerFood += 50;
+                                    Player.fuel += 50;
 
                                     Console.WriteLine($"New Level : {Player.currentPlayerLevel} -> {Player.playerLevel}");
                                     Player.currentPlayerLevel = Player.playerLevel;
@@ -1072,6 +1075,7 @@ namespace TEST
                                     Console.WriteLine($"+50 Food");
                                     Console.WriteLine($"+20 Health");
                                     Console.WriteLine($"+50 Coins");
+                                    Console.WriteLine($"+50 Fuel");
                                     Console.WriteLine();
                                 }
 
@@ -1267,6 +1271,56 @@ namespace TEST
                                     else if (didHeTookDamage == 3 || didHeTookDamage == 4)
                                     {
                                         Console.WriteLine("Without any injuries.");
+                                    }
+                                    int didHeFoundSomething = new Random().Next(1, 2);
+                                    switch (didHeFoundSomething)
+                                    {
+                                        case 1:
+                                            int whatHeFound = new Random().Next(1, 6);
+                                            switch (whatHeFound)
+                                            {
+                                                case 1:
+                                                    Console.WriteLine($"{Player.playerName} you found 50 food!");
+                                                    Player.playerFood += 50;
+                                                    break;
+                                                case 2:
+                                                    Console.WriteLine($"{Player.playerName} you found 75 fuel!");
+                                                    Player.fuel += 75;
+                                                    break;
+                                                case 3:
+                                                    Console.WriteLine($"{Player.playerName} you found 25 deffensive items!");
+                                                    Player.playerFood += 25;
+                                                    break;
+                                                case 4:
+                                                    Console.WriteLine($"{Player.playerName} you found a med kit!");
+                                                    Console.WriteLine("+50 Health");
+                                                    Player.playerHealth += 50;
+                                                    break;
+                                                case 5:
+                                                    Console.WriteLine($"{Player.playerName} you found 100 coins!");
+                                                    Player.playerCoins += 100;
+                                                    break;
+                                                case 6:
+                                                    Console.WriteLine($"{Player.playerName} you found chest!");
+                                                    int chest = new Random().Next(1, 3);
+                                                    switch (chest)
+                                                    {
+                                                        case 1:
+                                                            Console.WriteLine("+25 deff");
+                                                            Player.playerDeffence += 25;
+                                                            break;
+                                                        case 2:
+                                                            Console.WriteLine("+15 health");
+                                                            Player.playerHealth += 15;
+                                                            break;
+                                                        case 3:
+                                                            Console.WriteLine("+75 coins");
+                                                            Player.playerCoins += 75;
+                                                            break;
+                                                    }
+                                                    break;
+                                            }
+                                            break;
                                     }
                                     break;
                                 case 7:
