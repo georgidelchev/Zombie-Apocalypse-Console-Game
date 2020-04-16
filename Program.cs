@@ -1,9 +1,5 @@
 ﻿using System;//Thread.Sleep
 using System.Threading;
-
-
-
-
 namespace TEST
 {
     public class Program
@@ -140,6 +136,7 @@ namespace TEST
         public static string currentPants = string.Empty;
         public static string currentBoots = string.Empty;
         public static double playerDeffence = 50;
+        public static double fuel = 0;
         // RANDOMIZED WEAPON
         public static int playerWeapon;   // player's weapon randomized
 
@@ -214,6 +211,51 @@ namespace TEST
         }
 
     }
+    public class Car
+    {
+        public static string carName = string.Empty;
+        public static double carFuel;
+        public static double carDeffence;
+
+        public static int carType = new Random().Next(1, 6);
+        public void CarType()
+        {
+            switch (carType)
+            {
+                case 1:
+                    carName = "Volvo";
+                    carFuel = 100;
+                    carDeffence = 50;
+                    break;
+                case 2:
+                    carName = "Citroen";
+                    carFuel = 95;
+                    carDeffence = 60;
+                    break;
+                case 3:
+                    carName = "BMW";
+                    carFuel = 80;
+                    carDeffence = 75;
+                    break;
+                case 4:
+                    carName = "Mercedes";
+                    carFuel = 75;
+                    carDeffence = 100;
+                    break;
+                case 5:
+                    carName = "VW";
+                    carFuel = 70;
+                    carDeffence = 130;
+                    break;
+                case 6:
+                    carName = "Audi";
+                    carFuel = 60;
+                    carDeffence = 150;
+                    break;
+
+            }
+        }
+    }
     public class Kid
     {
         public static string kidName = "Will";  // the name of the Kid       
@@ -280,6 +322,7 @@ namespace TEST
     {
         public static bool isPlayerHaveKidHelper = false;
         public static bool isPlayerHaveDogHelper = false;
+        public static bool isPlayerHaveAnCar = false;
         public static double dogDamage = 25;
         public static double dogHealth = 100;
         public static string dogName = "ReX";
@@ -374,6 +417,175 @@ namespace TEST
                     Console.WriteLine("He likes you very much :)) !");
                     Console.WriteLine($"{Player.playerName} you need to feed {dogName}!");
                     isPlayerHaveDogHelper = true;
+                    break;
+            }
+        }
+        public void PlayersCar()
+        {
+            Console.WriteLine($"{Player.playerName} you found an car!");
+            Console.WriteLine("Is it working?");
+            Console.WriteLine("Checking...");
+            int condition = new Random().Next(1, 10);
+            switch (condition)
+            {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                    Console.WriteLine($"{Player.playerName} you have bad luck...");
+                    int damageType = new Random().Next(1, 5);
+                    int isThereAnyFuel = new Random().Next(1, 2);
+                    int howMuchFuel = new Random().Next(1, 5);
+                    switch (damageType)
+                    {
+                        case 1:
+                            Console.WriteLine($"The engine is not working.");
+                            switch (isThereAnyFuel)
+                            {
+                                case 1:
+                                    switch (howMuchFuel)
+                                    {
+                                        case 1:
+                                            Console.WriteLine($"{Player.playerName} there is 10 fuel.");
+                                            Player.fuel += 10;
+                                            break;
+                                        case 2:
+                                            Console.WriteLine($"{Player.playerName} there is 30 fuel.");
+                                            Player.fuel += 30;
+                                            break;
+                                        case 3:
+                                            Console.WriteLine($"{Player.playerName} there is 50 fuel.");
+                                            Player.fuel += 50;
+                                            break;
+                                        case 4:
+                                            Console.WriteLine($"{Player.playerName} there is 80 fuel.");
+                                            Player.fuel += 80;
+                                            break;
+                                        case 5:
+                                            Console.WriteLine($"{Player.playerName} there is 100 fuel.");
+                                            Player.fuel += 100;
+                                            break;
+                                    }
+                                    break;
+                                case 2:
+                                    Console.WriteLine($"{Player.playerName} there is no fuel left.");
+                                    break;
+                            }
+                            break;
+                        case 2:
+                            Console.WriteLine($"There is no tires.");
+                            switch (isThereAnyFuel)
+                            {
+                                case 1:
+                                    switch (howMuchFuel)
+                                    {
+                                        case 1:
+                                            Console.WriteLine($"{Player.playerName} there is 2 fuel.");
+                                            Player.fuel += 2;
+                                            break;
+                                        case 2:
+                                            Console.WriteLine($"{Player.playerName} there is 6 fuel.");
+                                            Player.fuel += 6;
+                                            break;
+                                        case 3:
+                                            Console.WriteLine($"{Player.playerName} there is 8 fuel.");
+                                            Player.fuel += 8;
+                                            break;
+                                        case 4:
+                                            Console.WriteLine($"{Player.playerName} there is 10 fuel.");
+                                            Player.fuel += 10;
+                                            break;
+                                        case 5:
+                                            Console.WriteLine($"{Player.playerName} there is 15 fuel.");
+                                            Player.fuel += 15;
+                                            break;
+                                    }
+                                    break;
+                                case 2:
+                                    Console.WriteLine($"{Player.playerName} there is no fuel left.");
+                                    break;
+                            }
+                            break;
+                        case 3:
+                            Console.WriteLine($"Brakes doesn't works.");
+                            switch (isThereAnyFuel)
+                            {
+                                case 1:
+                                    switch (howMuchFuel)
+                                    {
+                                        case 1:
+                                            Console.WriteLine($"{Player.playerName} there is 8 fuel.");
+                                            Player.fuel += 8;
+                                            break;
+                                        case 2:
+                                            Console.WriteLine($"{Player.playerName} there is 13 fuel.");
+                                            Player.fuel += 13;
+                                            break;
+                                        case 3:
+                                            Console.WriteLine($"{Player.playerName} there is 18 fuel.");
+                                            Player.fuel += 18;
+                                            break;
+                                        case 4:
+                                            Console.WriteLine($"{Player.playerName} there is 20 fuel.");
+                                            Player.fuel += 20;
+                                            break;
+                                        case 5:
+                                            Console.WriteLine($"{Player.playerName} there is 35 fuel.");
+                                            Player.fuel += 35;
+                                            break;
+                                    }
+                                    break;
+                                case 2:
+                                    Console.WriteLine($"{Player.playerName} there is no fuel left.");
+                                    break;
+                            }
+                            break;
+                        case 4:
+                            Console.WriteLine($"The fuel tank is broken through.");
+                            break;
+                        case 5:
+                            Console.WriteLine($"No battery.");
+                            switch (isThereAnyFuel)
+                            {
+                                case 1:
+                                    switch (howMuchFuel)
+                                    {
+                                        case 1:
+                                            Console.WriteLine($"{Player.playerName} there is 15 fuel.");
+                                            Player.fuel += 15;
+                                            break;
+                                        case 2:
+                                            Console.WriteLine($"{Player.playerName} there is 25 fuel.");
+                                            Player.fuel += 25;
+                                            break;
+                                        case 3:
+                                            Console.WriteLine($"{Player.playerName} there is 30 fuel.");
+                                            Player.fuel += 30;
+                                            break;
+                                        case 4:
+                                            Console.WriteLine($"{Player.playerName} there is 50 fuel.");
+                                            Player.fuel += 50;
+                                            break;
+                                        case 5:
+                                            Console.WriteLine($"{Player.playerName} there is 65 fuel.");
+                                            Player.fuel += 65;
+                                            break;
+                                    }
+                                    break;
+                                case 2:
+                                    Console.WriteLine($"{Player.playerName} there is no fuel left.");
+                                    break;
+                            }
+                            break;
+                    }
+                    break;
+                case 8:
+                case 9:
+                    Console.WriteLine($"{Player.playerName} you have found an working car!!");
+                    isPlayerHaveAnCar = true;
                     break;
             }
         }
