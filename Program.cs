@@ -142,7 +142,7 @@ namespace TEST
         public static string playerName;  // the name of the Player       
         public static double playerFood = 10;  // amount of food that Player have
         public static double playerHunger = 100;
-        public static double playerHealth = 200; // health of the player
+        public static double playerHealth = 0 м; // health of the player
         public static string playerGear;  // current Player gear
         public static double playerCoins = 25; // current Player coins
         public static int playerLevel = 0; // current Player level
@@ -165,6 +165,9 @@ namespace TEST
         public static double currDamage;
         public static double currClass;
 
+        // TAKEN AND DEALED DAMAGE
+        public static double dealtDamage = 0;
+        public static double tookDamage = 0;
 
         // EQUIPMENT
         public static string[] leatherArmor = { "Leather Helmet", "Leather Chestplate", "Leather Pants", "Leather Boots", }; // Leather armor - 2 deff points
@@ -959,6 +962,23 @@ namespace TEST
                     {
                         while (isPlayerAlive && !isPlayerWinner)
                         {
+                            if (Player.currDamage >= ZombiesTypes.zombieDamage)
+                            {
+                                Player.dealtDamage += ZombiesTypes.zombieHealth;
+                            }
+                            else if (ZombiesTypes.zombieHealth > Player.currDamage)
+                            {
+                                Player.dealtDamage += Player.currDamage;
+                            }
+
+                            if (ZombiesTypes.zombieDamage >= Player.playerHealth)
+                            {
+                                Player.tookDamage += Player.playerHealth;
+                            }
+                            else if (Player.playerHealth > ZombiesTypes.zombieDamage)
+                            {
+                                Player.tookDamage += ZombiesTypes.zombieDamage;
+                            }
 
                             if (PlayerHelper.isPlayerHaveKidHelper == true)
                             {
@@ -1322,8 +1342,12 @@ namespace TEST
             Console.WriteLine($"   ■ Chestplate: [{Player.currentChestplate}]");
             Console.WriteLine($"   ■ Pants: [{Player.currentPants}]");
             Console.WriteLine($"   ■ Boots: [{Player.currentBoots}]");
+            Console.WriteLine();
+            Console.WriteLine($"   ■ Taken Damage: [{Player.tookDamage}]");
+            Console.WriteLine($"   ■ Dealed Damage: [{Player.dealtDamage}]");
+
         }
-    } // to upgrade this class
+    }
     public class Shop
     {
         public void ShopMenu()
