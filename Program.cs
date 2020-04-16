@@ -6,7 +6,6 @@ namespace TEST
     {
         public static void Main(string[] args)
         {
-            Console.CursorVisible = false;
             ZombieApocalypse text = new ZombieApocalypse();
             text.Zombie();
 
@@ -164,6 +163,7 @@ namespace TEST
         public static string weaponName; // the name of the weapon
         public static double weaponDamage; // the damage of the weapon
         public static string weaponClass; // the quality class of the weapon
+        public static double currDamage;
 
 
         // EQUIPMENT
@@ -225,6 +225,9 @@ namespace TEST
             {
                 maxClass = weaponClassCheck;
                 currentWeapon = weaponName;
+                currDamage = weaponDamage;
+                Console.WriteLine();
+                Console.WriteLine($"{Player.playerName} you've found an new better weapon - {weaponName}!");
             }
 
         }
@@ -737,6 +740,7 @@ namespace TEST
 
                 if (actionType != 1)
                 {
+                    Console.WriteLine();
                     Console.WriteLine($"{Player.playerName} you've met an {ZombiesTypes.zombieType} with {ZombiesTypes.zombieHealth} Health and {ZombiesTypes.zombieDamage} Attack.");
                     //Thread.Sleep(2000);
                     clearing.ClearingLines();
@@ -801,7 +805,7 @@ namespace TEST
                                 $"{Environment.NewLine}Hunger bar: {Player.playerHunger}/100");
                         }
                     }
-
+                    Console.WriteLine();
                     Console.WriteLine($"Weapon: [{Player.currentWeapon}] | " +
                                               $"{ Environment.NewLine}" +
                                               $"Helmet: [{Player.currentHelmet}] | " +
@@ -811,12 +815,12 @@ namespace TEST
                     Console.WriteLine();
 
                     Console.WriteLine($"Player LVL: [{Player.playerLevel}]  -  EXP: [{Player.playerExp}/100]                                                            ");
-                    Console.WriteLine($"Hunger: {Player.playerHunger}/100  -  Current Food: {Player.playerFood}");
+                    Console.WriteLine($"Hunger: {Player.playerHunger}/100   -  Food: {Player.playerFood}");
                     Console.WriteLine($"╔════════════════════════════════╗           ║Current Health: [{Player.playerHealth}]      ");
                     Console.WriteLine($"║#=# Choose an action to  do: #=#║           ║Current Deffence: [{Player.playerDeffence}]   ");
-                    Console.WriteLine($"║════════════════════════════════║           ║Current Damage: [{Player.weaponDamage}]      ");
+                    Console.WriteLine($"║════════════════════════════════║           ║Current Damage: [{Player.currDamage}]      ");
                     Console.WriteLine($"║ [0] - Fight with the zombie.   ║           ║Current Coins: [{Player.playerCoins}]        ");
-                    Console.WriteLine($"║ [1] - Run Away from the zombie.║           ║Zombie Name : [{ZombiesTypes.zombieType}]        ");
+                    Console.WriteLine($"║ [1] - Run Away from the zombie.║           ║Zombie Type : [{ZombiesTypes.zombieType}]        ");
                     Console.WriteLine($"║ [2] - Hide somewhere.          ║           ║Zombie HP: [{ZombiesTypes.zombieHealth}]         ");
                     Console.WriteLine($"╚════════════════════════════════╝           ║Zombie Attack: [{ZombiesTypes.zombieDamage}]");
 
@@ -827,12 +831,12 @@ namespace TEST
                         Console.WriteLine($"                     Please enter an valid operation-{Player.playerName}! :");
                         Console.WriteLine();
                         Console.WriteLine($" Player LVL: [{Player.playerLevel}]  -  EXP: [{Player.playerExp}/100]                                                            ");
-                        Console.WriteLine($"Hunger: {Player.playerHunger}/100  -  Current Food: {Player.playerFood}");
+                        Console.WriteLine($"Hunger: {Player.playerHunger}/100    -  Food: {Player.playerFood}");
                         Console.WriteLine($"╔════════════════════════════════╗           ║Current Health: [{Player.playerHealth}]      ");
                         Console.WriteLine($"║#=# Choose an action to  do: #=#║           ║Current Deffence: [{Player.playerDeffence}]   ");
-                        Console.WriteLine($"║════════════════════════════════║           ║Current Damage: [{Player.weaponDamage}]      ");
+                        Console.WriteLine($"║════════════════════════════════║           ║Current Damage: [{Player.currDamage}]      ");
                         Console.WriteLine($"║ [0] - Fight with the zombie.   ║           ║Current Coins: [{Player.playerCoins}]        ");
-                        Console.WriteLine($"║ [1] - Run Away from the zombie.║           ║Zombie Name : [{ZombiesTypes.zombieType}]        ");
+                        Console.WriteLine($"║ [1] - Run Away from the zombie.║           ║Zombie Type : [{ZombiesTypes.zombieType}]        ");
                         Console.WriteLine($"║ [2] - Hide somewhere.          ║           ║Zombie HP: [{ZombiesTypes.zombieHealth}]         ");
                         Console.WriteLine($"╚════════════════════════════════╝           ║Zombie Attack: [{ZombiesTypes.zombieDamage}]");
                         actionToDo = int.Parse(Console.ReadLine());
@@ -854,6 +858,7 @@ namespace TEST
                             if (PlayerHelper.isPlayerHaveDogHelper == true)
                             {
                                 ZombiesTypes.zombieHealth -= PlayerHelper.dogDamage;
+                                PlayerHelper.dogHealth -= ZombiesTypes.zombieDamage / 2;
                                 Player.playerFood -= 10; // feeding the dog!
                                 if (PlayerHelper.dogHunger <= 90)
                                 {
@@ -874,8 +879,8 @@ namespace TEST
                                 Player.playerHealth -= diff;
                             }
 
-                            ZombiesTypes.zombieHealth -= Player.weaponDamage;
-                            PlayerHelper.dogHealth -= ZombiesTypes.zombieDamage / 2;
+                            ZombiesTypes.zombieHealth -= Player.currDamage;
+
                             if (PlayerHelper.dogHealth <= 0)
                             {
                                 Console.WriteLine($"{Player.playerName} , {PlayerHelper.dogName} is dead...");
@@ -894,6 +899,7 @@ namespace TEST
                             }
                             else if (ZombiesTypes.zombieHealth <= 0)
                             {
+                                Console.WriteLine();
                                 Console.WriteLine($"Good job {Player.playerName} , you killed" +
                                     $"{Environment.NewLine}successfully {ZombiesTypes.zombieType}.");
                                 Console.WriteLine();
@@ -902,6 +908,8 @@ namespace TEST
                                 Console.WriteLine($"+10 Health");
                                 Console.WriteLine($"+20 Exp");
                                 Console.WriteLine($"+25 Coins");
+                                Console.WriteLine();
+                                Thread.Sleep(2000);
 
                                 Player.playerFood += 30;
                                 Player.playerHealth += 10;
@@ -922,15 +930,22 @@ namespace TEST
                                     Console.WriteLine();
 
                                     Player.playerLevel++;
-                                    Player.playerHealth += 10;
+                                    Player.playerHealth += 20;
                                     Player.playerExp -= 100;
-                                    Player.playerCoins += 10;
+                                    Player.playerCoins += 50;
                                     Player.playerFood += 50;
-                                    Player.weaponDamage += 15;
 
                                     Console.WriteLine($"New Level : {Player.currentPlayerLevel} -> {Player.playerLevel}");
                                     Player.currentPlayerLevel = Player.playerLevel;
+
+                                    Console.WriteLine();
+                                    Console.WriteLine($"{Player.playerName} your reward is:");
+                                    Console.WriteLine($"+50 Food");
+                                    Console.WriteLine($"+20 Health");
+                                    Console.WriteLine($"+50 Coins");
+                                    Console.WriteLine();
                                 }
+                                
                                 isPlayerWinner = true;
                             }
                             int takingHunger = new Random().Next(1, 6);
@@ -960,6 +975,7 @@ namespace TEST
                             if (Player.playerHunger < 0)
                             {
                                 Player.playerHealth -= 5;
+                                Console.WriteLine();
                                 Console.WriteLine($"{Player.playerName} you are hungry! Eat some food");
                                 Console.WriteLine("-5 HP");
                             }
@@ -1174,7 +1190,7 @@ namespace TEST
             Console.WriteLine($"║Zombie HP: [{ZombiesTypes.zombieHealth}]       ");
             Console.WriteLine($"║Zombie Attack: [{ZombiesTypes.zombieDamage}] ");
         }
-    }
+    } // to upgrade this class
     public class Shop
     {
         public void ShopMenu()
