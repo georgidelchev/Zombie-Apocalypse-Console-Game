@@ -6,6 +6,13 @@ namespace TEST
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("     N");
+            Console.WriteLine("    [0]");
+            Console.Write("W[1]");
+            Console.WriteLine("   [3]E");
+            Console.WriteLine("    [2]");
+            Console.WriteLine("     S");
+            Console.ReadKey();
             ZombieApocalypse text = new ZombieApocalypse();
             text.Zombie();
 
@@ -836,6 +843,16 @@ namespace TEST
                         if (rideChoice == 0)
                         {
                             Console.WriteLine($"{Player.playerName} you decided to take a ride!!");
+                            Console.WriteLine();
+                            Console.WriteLine("Which way you choose?");
+                            Console.WriteLine();
+                            Console.WriteLine("[N]");
+                            Console.WriteLine("[0]");
+                            Console.WriteLine();
+                            Console.Write("W [1]");
+                            Console.Write("        E [3]");
+                            Console.WriteLine("[2]");
+                            Console.WriteLine("S");
                         }
                     }
 
