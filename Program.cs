@@ -74,7 +74,6 @@ namespace TEST
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Environment.NewLine);
-            Console.WriteLine(Environment.NewLine);
             foreach (string value in zombie)
             {
                 Console.WriteLine(value);
@@ -143,7 +142,7 @@ namespace TEST
         public static string playerName;  // the name of the Player       
         public static double playerFood = 10;  // amount of food that Player have
         public static double playerHunger = 100;
-        public static double playerHealth = 250; // health of the player
+        public static double playerHealth = 1; // health of the player
         public static string playerGear;  // current Player gear
         public static double playerCoins = 25; // current Player coins
         public static int playerLevel = 0; // current Player level
@@ -164,6 +163,7 @@ namespace TEST
         public static double weaponDamage; // the damage of the weapon
         public static string weaponClass; // the quality class of the weapon
         public static double currDamage;
+        public static double currClass;
 
 
         // EQUIPMENT
@@ -226,6 +226,7 @@ namespace TEST
                 maxClass = weaponClassCheck;
                 currentWeapon = weaponName;
                 currDamage = weaponDamage;
+                currClass = weaponClassCheck;
                 Console.WriteLine();
                 Console.WriteLine($"{Player.playerName} you've found an new better weapon - {weaponName}!");
             }
@@ -945,7 +946,7 @@ namespace TEST
                                     Console.WriteLine($"+50 Coins");
                                     Console.WriteLine();
                                 }
-                                
+
                                 isPlayerWinner = true;
                             }
                             int takingHunger = new Random().Next(1, 6);
@@ -1182,13 +1183,20 @@ namespace TEST
     {
         public void Over()
         {
-            Console.WriteLine($"║Health Diff: [{Math.Abs(Player.playerHealth)}]      ");
-            Console.WriteLine($"║Last Weapon: [{Player.weaponName}]  CLASS: [{Player.weaponClass}]      ");
-            Console.WriteLine($"║Current Coins: [{Player.playerCoins}]        ");
-            Console.WriteLine("          You lost VS:                              ");
-            Console.WriteLine($"║Zombie Name : [{ZombiesTypes.zombieType}]    ");
-            Console.WriteLine($"║Zombie HP: [{ZombiesTypes.zombieHealth}]       ");
-            Console.WriteLine($"║Zombie Attack: [{ZombiesTypes.zombieDamage}] ");
+            Console.WriteLine($"╔════════════════════════════════╗");
+            Console.WriteLine($"║     #=# DEAD STATISTICS #=#    ║");
+            Console.WriteLine($"╚════════════════════════════════╝");
+            Console.WriteLine();
+            Console.WriteLine($"    Health Diff: [{Math.Abs(Player.playerHealth)}]");
+            Console.WriteLine($"    Last Weapon: [{Player.weaponName}]");
+            Console.WriteLine($"    Weapon CLASS: [{Player.currClass}]");
+            Console.WriteLine();
+            Console.WriteLine($"    Dog: {PlayerHelper.isPlayerHaveDogHelper}");
+            Console.WriteLine($"    Kid: {PlayerHelper.isPlayerHaveKidHelper}");
+            Console.WriteLine();
+            Console.WriteLine($"    Zombie Name : [{ZombiesTypes.zombieType}]");
+            Console.WriteLine($"    Zombie HP Diff: [{Math.Abs(ZombiesTypes.zombieHealth)}]");
+            Console.WriteLine($"    Zombie Attack: [{ZombiesTypes.zombieDamage}]");
         }
     } // to upgrade this class
     public class Shop
@@ -1228,7 +1236,7 @@ namespace TEST
                         Console.WriteLine();
                         Console.WriteLine($"      ╔══════════════════════╗");
                         Console.WriteLine($"      ║ Current gold: " +
-                                                    $"{Player.playerCoins}     ║");
+                                                    $"{Player.playerCoins}    ║");
                         Console.WriteLine($"      ╚══════════════════════╝");
                         Console.WriteLine($"╔════════════════════════════════╗");
                         Console.WriteLine($"║       #=# ARMORS MENU #=#      ║");
@@ -1341,7 +1349,7 @@ namespace TEST
                         Console.WriteLine();
                         Console.WriteLine($"      ╔══════════════════════╗");
                         Console.WriteLine($"      ║ Current gold: " +
-                                                    $"{Player.playerCoins}     ║");
+                                                    $"{Player.playerCoins}    ║");
                         Console.WriteLine($"      ╚══════════════════════╝");
                         Console.WriteLine($"╔════════════════════════════════╗");
                         Console.WriteLine($"║      #=# WEAPONS MENU #=#      ║");
