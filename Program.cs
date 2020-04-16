@@ -614,6 +614,15 @@ namespace TEST
                     Console.WriteLine($"{Car.carName}");
                     Console.WriteLine($"{Car.carFuel} fuel");
                     Console.WriteLine($"{Car.carDeffence} deffence");
+                    if (Player.fuel < Car.carFuel)
+                    {
+                        Console.WriteLine($"{Player.playerName} you dont have enough fuel,sorry.");
+                        isPlayerHaveAnCar = false;
+                    }
+                    else
+                    {
+                        Player.playerDeffence += Car.carDeffence;
+                    }
                     break;
             }
         }
