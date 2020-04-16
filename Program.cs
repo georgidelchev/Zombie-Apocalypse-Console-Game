@@ -586,6 +586,11 @@ namespace TEST
                 case 9:
                     Console.WriteLine($"{Player.playerName} you have found an working car!!");
                     isPlayerHaveAnCar = true;
+                    Car car = new Car();
+                    car.CarType();
+                    Console.WriteLine($"{Car.carName}");
+                    Console.WriteLine($"{Car.carFuel} fuel");
+                    Console.WriteLine($"{Car.carDeffence} deffence");
                     break;
             }
         }
@@ -817,7 +822,6 @@ namespace TEST
 
                     double diff = 0;
                     PlayerHelper helper = new PlayerHelper();
-                    helper.DogHelper();
                     if (actionToDo == 0) // fighting with the zombies
                     {
                         while (isPlayerAlive && !isPlayerWinner)
@@ -1081,6 +1085,10 @@ namespace TEST
                                     else if (didHeTookDamage == 3 || didHeTookDamage == 4)
                                     {
                                         Console.WriteLine("Without any injuries.");
+                                    }
+                                    if (PlayerHelper.isPlayerHaveAnCar == false)
+                                    {
+                                        helper.PlayersCar();
                                     }
                                     break;
                                 case 5:
