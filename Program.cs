@@ -36,6 +36,7 @@ namespace TEST
         }
     }
 
+    // classes \/
     public class ZombieApocalypse
     {
         public void Zombie()
@@ -114,7 +115,7 @@ namespace TEST
             Thread.Sleep(2500);
             Console.Clear();
         }
-    }                     // classes
+    }                     
     public class BeginningInformation
     {
         public void WelcomeInfo()
@@ -134,7 +135,7 @@ namespace TEST
             Console.WriteLine(Player.playerName);    // testing
             Console.WriteLine(Player.playerFood -= 5); // testing
         }
-    }                 // classes
+    }                 
     public class Player
     {
         // PLAYER STATS
@@ -235,7 +236,7 @@ namespace TEST
 
         }
 
-    }                               // classes
+    }                               
     public class Car
     {
         public static string carName = string.Empty;
@@ -280,7 +281,7 @@ namespace TEST
 
             }
         }
-    }                                  // classes
+    }                                  
     public class Kid
     {
         public static string kidName = "Will";  // the name of the Kid       
@@ -342,7 +343,7 @@ namespace TEST
             currentKidWeapon = kidWeaponName;
             kidWeapon = 0;
         }
-    }                                  // classes
+    }                                  
     public class PlayerHelper
     {
         public static bool isPlayerHaveKidHelper = false;
@@ -628,7 +629,7 @@ namespace TEST
                     break;
             }
         }
-    }                         // classes
+    }                         
     public class ZombiesTypes
     {
         // ZOMBIES STATS
@@ -690,7 +691,7 @@ namespace TEST
             zombieHealth = 100;
         }
 
-    }                         // classes
+    }                         
     public class Fighting
     {
         public static int actionType = 0;
@@ -1359,7 +1360,7 @@ namespace TEST
 
             }
         }
-    }                             // classes
+    }                             
     public class GameOver
     {
         public string[] gameOvr = { "G", "A", "M", "E", " ", "O", "V", "E", "R", "!" };
@@ -1400,7 +1401,7 @@ namespace TEST
             Console.WriteLine($"   ■ Dealed Damage: [{Player.dealtDamage}]");
 
         }
-    }                             // classes
+    }                             
     public class Shop
     {
         public void ShopMenu()
@@ -1651,7 +1652,7 @@ namespace TEST
             }
         }
 
-    }                                 // classes
+    }                                 
     public class ClearingLine
     {
         public void ClearingLines()
@@ -1661,5 +1662,5 @@ namespace TEST
             Console.Write(new string(' ', Console.BufferWidth));
             Console.SetCursorPosition(0, Console.CursorTop);
         }
-    }                         // classes
+    }                         
 }
