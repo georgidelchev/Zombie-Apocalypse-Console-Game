@@ -142,7 +142,7 @@ namespace TEST
         public static string playerName;  // the name of the Player       
         public static double playerFood = 10;  // amount of food that Player have
         public static double playerHunger = 100;
-        public static double playerHealth = 1; // health of the player
+        public static double playerHealth = 200; // health of the player
         public static string playerGear;  // current Player gear
         public static double playerCoins = 25; // current Player coins
         public static int playerLevel = 0; // current Player level
@@ -153,7 +153,7 @@ namespace TEST
         public static string currentPants = string.Empty;
         public static string currentBoots = string.Empty;
         public static double playerDeffence = 50;
-        public static double fuel = 0;
+        public static double fuel = 200;
         // RANDOMIZED WEAPON
         public static int playerWeapon;   // player's weapon randomized
 
@@ -1298,13 +1298,16 @@ namespace TEST
                 Console.Write($"{gameOvr[i]}");
                 Thread.Sleep(350);
             }
+
             Console.WriteLine();
 
             Console.WriteLine($"╔════════════════════════════════╗");
             Console.WriteLine($"║     #=# DEAD STATISTICS #=#    ║");
             Console.WriteLine($"╚════════════════════════════════╝");
             Console.WriteLine();
+            Console.WriteLine($"   ■ Your level: [{Player.playerLevel}]");
             Console.WriteLine($"   ■ Health Diff: [{Math.Abs(Player.playerHealth)}]");
+            Console.WriteLine($"   ■ Food left: [{Player.playerFood}]");
             Console.WriteLine($"   ■ Last Weapon: [{Player.currentWeapon}]");
             Console.WriteLine($"   ■ Weapon CLASS: [{Player.currClass}]");
             Console.WriteLine();
