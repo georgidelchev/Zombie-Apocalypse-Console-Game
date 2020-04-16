@@ -6,13 +6,6 @@ namespace TEST
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("     N");
-            Console.WriteLine("    [0]");
-            Console.Write("W[1]");
-            Console.WriteLine("   [3]E");
-            Console.WriteLine("    [2]");
-            Console.WriteLine("     S");
-            Console.ReadKey();
             ZombieApocalypse text = new ZombieApocalypse();
             text.Zombie();
 
@@ -50,20 +43,20 @@ namespace TEST
         {
             Console.ForegroundColor = ConsoleColor.Red; // making console text color in red
             string[] zombie = new string[]
-                                        {"                                                                            ",
-                                         "                              ███████╗░█████╗░███╗░░░███╗██████╗░██╗███████╗",
-                                         "                              ╚════██║██╔══██╗████╗░████║██╔══██╗██║██╔════╝",
-                                         "                              ░░███╔═╝██║░░██║██╔████╔██║██████╦╝██║█████╗░░",
-                                         "                              ██╔══╝░░██║░░██║██║╚██╔╝██║██╔══██╗██║██╔══╝░░",
-                                         "                              ███████╗╚█████╔╝██║░╚═╝░██║██████╦╝██║███████╗",
-                                         "                              ╚══════╝░╚════╝░╚═╝░░░░░╚═╝╚═════╝░╚═╝╚══════╝",
-                                         "                                                                                              ",
-                                         "             ░█████╗░██████╗░░█████╗░░█████╗░░█████╗░██╗░░░░░██╗░░░██╗██████╗░░██████╗███████╗",
-                                         "             ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔══██╗██║░░░░░╚██╗░██╔╝██╔══██╗██╔════╝██╔════╝",
-                                         "             ███████║██████╔╝██║░░██║██║░░╚═╝███████║██║░░░░░░╚████╔╝░██████╔╝╚█████╗░█████╗░░",
-                                         "             ██╔══██║██╔═══╝░██║░░██║██║░░██╗██╔══██║██║░░░░░░░╚██╔╝░░██╔═══╝░░╚═══██╗██╔══╝░░",
-                                         "             ██║░░██║██║░░░░░╚█████╔╝╚█████╔╝██║░░██║███████╗░░░██║░░░██║░░░░░██████╔╝███████╗",
-                                         "             ╚═╝░░╚═╝╚═╝░░░░░░╚════╝░░╚════╝░╚═╝░░╚═╝╚══════╝░░░╚═╝░░░╚═╝░░░░░╚═════╝░╚══════╝"};
+                                        {"                                                                              ",
+                                         "                                ███████╗░█████╗░███╗░░░███╗██████╗░██╗███████╗",
+                                         "                                ╚════██║██╔══██╗████╗░████║██╔══██╗██║██╔════╝",
+                                         "                                ░░███╔═╝██║░░██║██╔████╔██║██████╦╝██║█████╗░░",
+                                         "                                ██╔══╝░░██║░░██║██║╚██╔╝██║██╔══██╗██║██╔══╝░░",
+                                         "                                ███████╗╚█████╔╝██║░╚═╝░██║██████╦╝██║███████╗",
+                                         "                                ╚══════╝░╚════╝░╚═╝░░░░░╚═╝╚═════╝░╚═╝╚══════╝",
+                                         "                                                                                                ",
+                                         "               ░█████╗░██████╗░░█████╗░░█████╗░░█████╗░██╗░░░░░██╗░░░██╗██████╗░░██████╗███████╗",
+                                         "               ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔══██╗██║░░░░░╚██╗░██╔╝██╔══██╗██╔════╝██╔════╝",
+                                         "               ███████║██████╔╝██║░░██║██║░░╚═╝███████║██║░░░░░░╚████╔╝░██████╔╝╚█████╗░█████╗░░",
+                                         "               ██╔══██║██╔═══╝░██║░░██║██║░░██╗██╔══██║██║░░░░░░░╚██╔╝░░██╔═══╝░░╚═══██╗██╔══╝░░",
+                                         "               ██║░░██║██║░░░░░╚█████╔╝╚█████╔╝██║░░██║███████╗░░░██║░░░██║░░░░░██████╔╝███████╗",
+                                         "               ╚═╝░░╚═╝╚═╝░░░░░░╚════╝░░╚════╝░╚═╝░░╚═╝╚══════╝░░░╚═╝░░░╚═╝░░░░░╚═════╝░╚══════╝"};
 
 
             ClearingLine clr = new ClearingLine();
@@ -89,7 +82,7 @@ namespace TEST
             Thread.Sleep(5000);
             Console.WriteLine();
             string[] key = {
-                "                                          ",
+                "                                            ",
                 "P", "r", "e", "s", "s", " ",
                 "a", "n", "y", " ",
                 "k", "e", "y", " ",
@@ -823,7 +816,7 @@ namespace TEST
                         }
                     }
 
-                    if (PlayerHelper.isPlayerHaveAnCar == true)
+                    if (PlayerHelper.isPlayerHaveAnCar == true && Player.fuel >= Car.carFuel)
                     {
                         Console.WriteLine($"{Player.playerName} you can take a ride to other city.");
                         Console.WriteLine("Did you want to?");
@@ -839,20 +832,85 @@ namespace TEST
                             Console.WriteLine($"Please enter an valid operation-{Player.playerName}! :");
                             rideChoice = int.Parse(Console.ReadLine());
                         }
-                        
+
                         if (rideChoice == 0)
                         {
                             Console.WriteLine($"{Player.playerName} you decided to take a ride!!");
                             Console.WriteLine();
                             Console.WriteLine("Which way you choose?");
                             Console.WriteLine();
-                            Console.WriteLine("[N]");
-                            Console.WriteLine("[0]");
-                            Console.WriteLine();
-                            Console.Write("W [1]");
-                            Console.Write("        E [3]");
-                            Console.WriteLine("[2]");
-                            Console.WriteLine("S");
+
+                            Console.WriteLine("     N");
+                            Console.WriteLine("    [0]");
+                            Console.Write("W[1]");
+                            Console.WriteLine("   [3]E");
+                            Console.WriteLine("    [2]");
+                            Console.WriteLine("     S");
+
+                            int way = int.Parse(Console.ReadLine());
+                            switch (way)
+                            {
+                                case 0:
+                                    Console.WriteLine("Wohoo taking a ride to the North!");
+                                    Console.WriteLine("Let's see whats there ;).");
+                                    Console.WriteLine($"-{Car.carFuel} fuel , Current fuel: {Player.fuel}");
+                                    Player.fuel -= Car.carFuel;
+                                    Thread.Sleep(5000);
+                                    Console.WriteLine($"{Player.playerName} you've found:");
+                                    Console.WriteLine("+25 Food");
+                                    Console.WriteLine("+25 Defence items");
+                                    Console.WriteLine("+25 EXP");
+
+                                    Player.playerFood += 25;
+                                    Player.playerDeffence += 25;
+                                    Player.playerExp += 25;
+                                    break;
+                                case 1:
+                                    Console.WriteLine("Wohoo taking a ride to the West!");
+                                    Console.WriteLine("Let's see whats there ;).");
+                                    Console.WriteLine($"-{Car.carFuel} fuel , Current fuel: {Player.fuel}");
+                                    Player.fuel -= Car.carFuel;
+                                    Thread.Sleep(5000);
+                                    Console.WriteLine($"{Player.playerName} you've found:");
+                                    Console.WriteLine("+65 Food");
+                                    Console.WriteLine("+15 Defence items");
+                                    Console.WriteLine("+35 EXP");
+
+                                    Player.playerFood += 65;
+                                    Player.playerDeffence += 15;
+                                    Player.playerExp += 35;
+                                    break;
+                                case 2:
+                                    Console.WriteLine("Wohoo taking a ride to the East!");
+                                    Console.WriteLine("Let's see whats there ;).");
+                                    Console.WriteLine($"-{Car.carFuel} fuel , Current fuel: {Player.fuel}");
+                                    Player.fuel -= Car.carFuel;
+                                    Thread.Sleep(5000);
+                                    Console.WriteLine($"{Player.playerName} you've found:");
+                                    Console.WriteLine("+52 Food");
+                                    Console.WriteLine("+35 Defence items");
+                                    Console.WriteLine("+78 EXP");
+
+                                    Player.playerFood += 52;
+                                    Player.playerDeffence += 35;
+                                    Player.playerExp += 78;
+                                    break;
+                                case 3:
+                                    Console.WriteLine("Wohoo taking a ride to the South!");
+                                    Console.WriteLine("Let's see whats there ;).");
+                                    Console.WriteLine($"-{Car.carFuel} fuel , Current fuel: {Player.fuel}");
+                                    Player.fuel -= Car.carFuel;
+                                    Thread.Sleep(5000);
+                                    Console.WriteLine($"{Player.playerName} you've found:");
+                                    Console.WriteLine("+142 Food");
+                                    Console.WriteLine("+52 Defence items");
+                                    Console.WriteLine("+15 EXP");
+
+                                    Player.playerFood += 142;
+                                    Player.playerDeffence += 52;
+                                    Player.playerExp += 15;
+                                    break;
+                            }
                         }
                     }
 
@@ -1231,22 +1289,36 @@ namespace TEST
     }
     public class GameOver
     {
+        public string[] gameOvr = { "G", "A", "M", "E", " ", "O", "V", "E", "R", "!" };
         public void Over()
         {
+            Console.Clear();
+            for (int i = 0; i < gameOvr.Length; i++)
+            {
+                Console.Write($"{gameOvr[i]}");
+                Thread.Sleep(350);
+            }
+            Console.WriteLine();
+
             Console.WriteLine($"╔════════════════════════════════╗");
             Console.WriteLine($"║     #=# DEAD STATISTICS #=#    ║");
             Console.WriteLine($"╚════════════════════════════════╝");
             Console.WriteLine();
-            Console.WriteLine($"    Health Diff: [{Math.Abs(Player.playerHealth)}]");
-            Console.WriteLine($"    Last Weapon: [{Player.weaponName}]");
-            Console.WriteLine($"    Weapon CLASS: [{Player.currClass}]");
+            Console.WriteLine($"   ■ Health Diff: [{Math.Abs(Player.playerHealth)}]");
+            Console.WriteLine($"   ■ Last Weapon: [{Player.currentWeapon}]");
+            Console.WriteLine($"   ■ Weapon CLASS: [{Player.currClass}]");
             Console.WriteLine();
-            Console.WriteLine($"    Dog: {PlayerHelper.isPlayerHaveDogHelper}");
-            Console.WriteLine($"    Kid: {PlayerHelper.isPlayerHaveKidHelper}");
+            Console.WriteLine($"   ■ Dog: {PlayerHelper.isPlayerHaveDogHelper}");
+            Console.WriteLine($"   ■ Kid: {PlayerHelper.isPlayerHaveKidHelper}");
             Console.WriteLine();
-            Console.WriteLine($"    Zombie Name : [{ZombiesTypes.zombieType}]");
-            Console.WriteLine($"    Zombie HP Diff: [{Math.Abs(ZombiesTypes.zombieHealth)}]");
-            Console.WriteLine($"    Zombie Attack: [{ZombiesTypes.zombieDamage}]");
+            Console.WriteLine($"   ■ Zombie Name : [{ZombiesTypes.zombieType}]");
+            Console.WriteLine($"   ■ Zombie HP Diff: [{Math.Abs(ZombiesTypes.zombieHealth)}]");
+            Console.WriteLine($"   ■ Zombie Attack: [{ZombiesTypes.zombieDamage}]");
+            Console.WriteLine();
+            Console.WriteLine($"   ■ Helmet: [{Player.currentHelmet}]");
+            Console.WriteLine($"   ■ Chestplate: [{Player.currentChestplate}]");
+            Console.WriteLine($"   ■ Pants: [{Player.currentPants}]");
+            Console.WriteLine($"   ■ Boots: [{Player.currentBoots}]");
         }
     } // to upgrade this class
     public class Shop
