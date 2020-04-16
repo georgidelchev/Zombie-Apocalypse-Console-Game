@@ -681,7 +681,7 @@ namespace TEST
                                     for (int i = 0; i < leveledUp.Length; i++)
                                     {
                                         Console.Write($"{leveledUp[i]}");
-                                        //Thread.Sleep(300);
+                                        Thread.Sleep(300);
                                     }
                                     Console.WriteLine();
 
