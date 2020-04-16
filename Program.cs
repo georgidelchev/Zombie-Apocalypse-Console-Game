@@ -58,9 +58,7 @@ namespace TEST
                                          "               ██║░░██║██║░░░░░╚█████╔╝╚█████╔╝██║░░██║███████╗░░░██║░░░██║░░░░░██████╔╝███████╗",
                                          "               ╚═╝░░╚═╝╚═╝░░░░░░╚════╝░░╚════╝░╚═╝░░╚═╝╚══════╝░░░╚═╝░░░╚═╝░░░░░╚═════╝░╚══════╝"};
 
-
             ClearingLine clr = new ClearingLine();
-
 
             for (int i = 0; i < zombie.Length; i++)
             {
@@ -71,9 +69,11 @@ namespace TEST
                 Thread.Sleep(1000);
                 Console.Clear();
             }
+
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Environment.NewLine);
+
             foreach (string value in zombie)
             {
                 Console.WriteLine(value);
@@ -81,6 +81,7 @@ namespace TEST
 
             Thread.Sleep(5000);
             Console.WriteLine();
+
             string[] key = {
                 "                                            ",
                 "P", "r", "e", "s", "s", " ",
@@ -112,10 +113,11 @@ namespace TEST
                 Console.SetCursorPosition(0, 1);
                 Thread.Sleep(100);
             }
+
             Thread.Sleep(2500);
             Console.Clear();
         }
-    }                     
+    }
     public class BeginningInformation
     {
         public void WelcomeInfo()
@@ -135,7 +137,7 @@ namespace TEST
             Console.WriteLine(Player.playerName);    // testing
             Console.WriteLine(Player.playerFood -= 5); // testing
         }
-    }                 
+    }
     public class Player
     {
         // PLAYER STATS
@@ -236,7 +238,7 @@ namespace TEST
 
         }
 
-    }                               
+    }
     public class Car
     {
         public static string carName = string.Empty;
@@ -281,7 +283,7 @@ namespace TEST
 
             }
         }
-    }                                  
+    }
     public class Kid
     {
         public static string kidName = "Will";  // the name of the Kid       
@@ -343,7 +345,7 @@ namespace TEST
             currentKidWeapon = kidWeaponName;
             kidWeapon = 0;
         }
-    }                                  
+    }
     public class PlayerHelper
     {
         public static bool isPlayerHaveKidHelper = false;
@@ -629,7 +631,7 @@ namespace TEST
                     break;
             }
         }
-    }                         
+    }
     public class ZombiesTypes
     {
         // ZOMBIES STATS
@@ -691,7 +693,7 @@ namespace TEST
             zombieHealth = 100;
         }
 
-    }                         
+    }
     public class Fighting
     {
         public static int actionType = 0;
@@ -1360,7 +1362,7 @@ namespace TEST
 
             }
         }
-    }                             
+    }
     public class GameOver
     {
         public string[] gameOvr = { "G", "A", "M", "E", " ", "O", "V", "E", "R", "!" };
@@ -1401,7 +1403,7 @@ namespace TEST
             Console.WriteLine($"   ■ Dealed Damage: [{Player.dealtDamage}]");
 
         }
-    }                             
+    }
     public class Shop
     {
         public void ShopMenu()
@@ -1422,11 +1424,12 @@ namespace TEST
                 case 0:
                     Console.WriteLine("[0] - ARMORS");
                     Console.WriteLine("[1] - WEAPONS");
-                    Console.WriteLine("[2] - EXIT");
+                    Console.WriteLine("[2] - FOOD/FUEL");
+                    Console.WriteLine("[3] - EXIT");
                     Console.Write(">> ");
 
                     int pick = int.Parse(Console.ReadLine());
-                    while (pick < 0 || pick > 2)
+                    while (pick < 0 || pick > 3)
                     {
                         Console.WriteLine($"Please enter an valid operation-{Player.playerName}! :");
                         Console.Write(">> ");
@@ -1648,11 +1651,123 @@ namespace TEST
                         }
 
                     }
+                    if (pick == 2)
+                    {
+                        Console.WriteLine("What you want to buy?");
+                        Console.WriteLine();
+                        Console.WriteLine($"      ╔══════════════════════╗");
+                        Console.WriteLine($"      ║ Current gold: " +
+                                                    $"{Player.playerCoins}    ║");
+                        Console.WriteLine($"      ╚══════════════════════╝");
+                        Console.WriteLine($"╔════════════════════════════════╗");
+                        Console.WriteLine($"║     #=# FOOD/FUEL MENU #=#     ║");
+                        Console.WriteLine($"║════════════════════════════════║");
+                        Console.WriteLine($"║[0] -  30 FOOD - [50G]          ║");
+                        Console.WriteLine($"║          [+10 food]            ║");
+                        Console.WriteLine($"║[1] -  50 FOOD - [80G]          ║");
+                        Console.WriteLine($"║          [+50 food]            ║");
+                        Console.WriteLine($"║[2] -  100 FOOD - [110G]        ║");
+                        Console.WriteLine($"║          [+100 food]           ║");
+                        Console.WriteLine($"║════════════════════════════════║");
+                        Console.WriteLine($"║[3] -  100 FUEL - [200G]        ║");
+                        Console.WriteLine($"║          [+100 fuel]           ║");
+                        Console.WriteLine($"║[4] -  200 FUEL - [500G]        ║");
+                        Console.WriteLine($"║          [+200 dmg]            ║");
+                        Console.WriteLine($"╚════════════════════════════════╝");
+                        Console.WriteLine($"   [5] - EXIT | [6] - PREV. PAGE  ");
+
+                        int order = int.Parse(Console.ReadLine());
+                        while (order < 0 || order > 4)
+                        {
+                            Console.WriteLine($"Please enter an valid operation-{Player.playerName}! :");
+                            Console.Write(">> ");
+                            order = int.Parse(Console.ReadLine());
+                        }
+
+                        if (order == 6)
+                        {
+                            goto case 0;
+                        }
+                        else if (order == 5)
+                        {
+                            break;
+                        }
+                        else if (order == 4)
+                        {
+                            if (Player.playerCoins >= 500)
+                            {
+                                Console.WriteLine($"{Player.playerName} you just bought 200 FUEL!");
+                                Player.playerCoins -= 500;
+                                Player.fuel += 200;
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{Player.playerName} you dont have enough money!" +
+                                    $"{Environment.NewLine}You need {500 - Player.playerCoins} more");
+                            }
+                        }
+                        else if (order == 3)
+                        {
+                            if (Player.playerCoins >= 200)
+                            {
+                                Console.WriteLine($"{Player.playerName} you just bought 100 FUEL!");
+                                Player.playerCoins -= 200;
+                                Player.fuel += 100;
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{Player.playerName} you dont have enough money!" +
+                                    $"{Environment.NewLine}You need {500 - Player.playerCoins} more");
+                            }
+                        }
+                        else if (order == 2)
+                        {
+                            if (Player.playerCoins >= 110)
+                            {
+                                Console.WriteLine($"{Player.playerName} you just bought 100 FOOD!");
+                                Player.playerCoins -= 110;
+                                Player.playerFood += 100;
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{Player.playerName} you dont have enough money!" +
+                                    $"{Environment.NewLine}You need {110 - Player.playerCoins} more");
+                            }
+                        }
+                        else if (order == 1)
+                        {
+                            if (Player.playerCoins >= 80)
+                            {
+                                Console.WriteLine($"{Player.playerName} you just bought 50 FOOD!");
+                                Player.playerCoins -= 80;
+                                Player.playerFood += 50;
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{Player.playerName} you dont have enough money!" +
+                                    $"{Environment.NewLine}You need {110 - Player.playerCoins} more");
+                            }
+                        }
+                        else if (order == 0)
+                        {
+                            if (Player.playerCoins >= 50)
+                            {
+                                Console.WriteLine($"{Player.playerName} you just bought 30 FOOD!");
+                                Player.playerCoins -= 50;
+                                Player.playerFood += 30;
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{Player.playerName} you dont have enough money!" +
+                                    $"{Environment.NewLine}You need {110 - Player.playerCoins} more");
+                            }
+                        }
+                    }
                     break;
             }
         }
 
-    }                                 
+    }
     public class ClearingLine
     {
         public void ClearingLines()
@@ -1662,5 +1777,5 @@ namespace TEST
             Console.Write(new string(' ', Console.BufferWidth));
             Console.SetCursorPosition(0, Console.CursorTop);
         }
-    }                         
+    }
 }
