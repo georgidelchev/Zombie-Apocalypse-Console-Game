@@ -142,7 +142,7 @@ namespace TEST
         public static string playerName;  // the name of the Player       
         public static double playerFood = 10;  // amount of food that Player have
         public static double playerHunger = 100;
-        public static double playerHealth = 0 м; // health of the player
+        public static double playerHealth = 150; // health of the player
         public static string playerGear;  // current Player gear
         public static double playerCoins = 25; // current Player coins
         public static int playerLevel = 0; // current Player level
