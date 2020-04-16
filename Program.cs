@@ -7,28 +7,27 @@ namespace TEST
         public static void Main(string[] args)
         {
             ZombieApocalypse text = new ZombieApocalypse();
-            text.Zombie();
+            text.Zombie(); // starting message Zombie Apocalypse + more messages
+
+            Player player = new Player();                                    // -\
+            BeginningInformation welcomeInfo = new BeginningInformation();   //   |
+            Fighting fighting = new Fighting();                              //   |=> declaring the classes
+            GameOver gameOver = new GameOver();                              //   |
+            ClearingLine clr = new ClearingLine();                           // -/
 
 
-            Player player = new Player();
-            BeginningInformation welcomeInfo = new BeginningInformation();
-            Fighting fighting = new Fighting();
-            GameOver gameOver = new GameOver();
-            ClearingLine clr = new ClearingLine();
-
-
-            Thread.Sleep(2000);
-            Console.WriteLine();
-            welcomeInfo.WelcomeInfo();
+            Thread.Sleep(2000); // 2 seconds cooldown
+            Console.WriteLine(); // empty line
+            welcomeInfo.WelcomeInfo(); // welcome info + more messages
             player.PlayerName(); // message to enter your name 
 
 
             Console.WriteLine($"{Player.playerName} press any key to continue!");
-            Console.ReadKey();
-            clr.ClearingLines();
-            Console.Clear();
+            Console.ReadKey(); // reading key
+            clr.ClearingLines(); // clearing lines
+            Console.Clear(); // clearing all the console
 
-            //Thread.Sleep(2000); // 2 seconds of sleep
+            Thread.Sleep(2000); // 2 seconds of sleep
             Console.WriteLine($"Hello {Player.playerName}! Nice to meet you!"); // hello message
             Console.WriteLine(); // empty line
 
@@ -115,7 +114,7 @@ namespace TEST
             Thread.Sleep(2500);
             Console.Clear();
         }
-    }
+    }                     // classes
     public class BeginningInformation
     {
         public void WelcomeInfo()
@@ -135,7 +134,7 @@ namespace TEST
             Console.WriteLine(Player.playerName);    // testing
             Console.WriteLine(Player.playerFood -= 5); // testing
         }
-    }
+    }                 // classes
     public class Player
     {
         // PLAYER STATS
@@ -236,7 +235,7 @@ namespace TEST
 
         }
 
-    }
+    }                               // classes
     public class Car
     {
         public static string carName = string.Empty;
@@ -281,7 +280,7 @@ namespace TEST
 
             }
         }
-    }
+    }                                  // classes
     public class Kid
     {
         public static string kidName = "Will";  // the name of the Kid       
@@ -343,7 +342,7 @@ namespace TEST
             currentKidWeapon = kidWeaponName;
             kidWeapon = 0;
         }
-    }
+    }                                  // classes
     public class PlayerHelper
     {
         public static bool isPlayerHaveKidHelper = false;
@@ -629,7 +628,7 @@ namespace TEST
                     break;
             }
         }
-    }
+    }                         // classes
     public class ZombiesTypes
     {
         // ZOMBIES STATS
@@ -691,7 +690,7 @@ namespace TEST
             zombieHealth = 100;
         }
 
-    }
+    }                         // classes
     public class Fighting
     {
         public static int actionType = 0;
@@ -1360,7 +1359,7 @@ namespace TEST
 
             }
         }
-    }
+    }                             // classes
     public class GameOver
     {
         public string[] gameOvr = { "G", "A", "M", "E", " ", "O", "V", "E", "R", "!" };
@@ -1401,7 +1400,7 @@ namespace TEST
             Console.WriteLine($"   ■ Dealed Damage: [{Player.dealtDamage}]");
 
         }
-    }
+    }                             // classes
     public class Shop
     {
         public void ShopMenu()
@@ -1652,7 +1651,7 @@ namespace TEST
             }
         }
 
-    }
+    }                                 // classes
     public class ClearingLine
     {
         public void ClearingLines()
@@ -1662,5 +1661,5 @@ namespace TEST
             Console.Write(new string(' ', Console.BufferWidth));
             Console.SetCursorPosition(0, Console.CursorTop);
         }
-    }
+    }                         // classes
 }
