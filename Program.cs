@@ -213,6 +213,7 @@ namespace TEST
         public static double dogDamage = 25;
         public static double dogHealth = 100;
         public static string dogName = "ReX";
+        public static double dogHunger = 100;
 
         public void KidHelper()
         {
@@ -539,15 +540,20 @@ namespace TEST
                     {
                         while (isPlayerAlive && !isPlayerWinner)
                         {
-                            
+
                             if (PlayerHelper.isPlayerHaveKidHelper == true)
                             {
-                                Player.playerFood -= 10; // feeding the dog!
                                 ZombiesTypes.zombieHealth -= Kid.kidWeaponDamage;
                             }
                             if (PlayerHelper.isPlayerHaveDogHelper == true)
                             {
                                 ZombiesTypes.zombieHealth -= PlayerHelper.dogDamage;
+                                Player.playerFood -= 10; // feeding the dog!
+                                if (PlayerHelper.dogHunger <= 90)
+                                {
+                                    PlayerHelper.dogHunger += 10;
+                                    PlayerHelper.dogHealth += 10;
+                                }
                             }
 
                             if (Player.playerDeffence > ZombiesTypes.zombieDamage)
