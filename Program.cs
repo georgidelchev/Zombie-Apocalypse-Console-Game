@@ -144,7 +144,7 @@ namespace TEST
         public static string playerName;  // the name of the Player       
         public static double playerFood = 10;  // amount of food that Player have
         public static double playerHunger = 100;
-        public static double playerHealth = 150; // health of the player
+        public static double playerHealth = 0; // health of the player
         public static string playerGear;  // current Player gear
         public static double playerCoins = 25; // current Player coins
         public static int playerLevel = 0; // current Player level
@@ -1365,15 +1365,66 @@ namespace TEST
     }
     public class GameOver
     {
-        public string[] gameOvr = { "G", "A", "M", "E", " ", "O", "V", "E", "R", "!" };
         public void Over()
         {
-            Console.Clear();
+
+            Console.ForegroundColor = ConsoleColor.Red; // making console text color in red
+            string[] gameOvr = new string[]
+                                        {"                                                                    ",
+                                         "                                ░██████╗░░█████╗░███╗░░░███╗███████╗",
+                                         "                                ██╔════╝░██╔══██╗████╗░████║██╔════╝",
+                                         "                                ██║░░██╗░███████║██╔████╔██║█████╗░░",
+                                         "                                ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░",
+                                         "                                ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗",
+                                         "                                ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝",
+                                         "                                                                   ",
+                                         "                                  ░█████╗░██╗░░░██╗███████╗██████╗░",
+                                         "                                  ██╔══██╗██║░░░██║██╔════╝██╔══██╗",
+                                         "                                  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝",
+                                         "                                  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗",
+                                         "                                  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║",
+                                         "                                  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝"};
+
             for (int i = 0; i < gameOvr.Length; i++)
             {
-                Console.Write($"{gameOvr[i]}");
+                for (int y = 0; y < i; y++)
+                {
+                    Console.WriteLine(gameOvr[y]);
+                }
+                Thread.Sleep(1000);
+                Console.Clear();
+            }
+
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(Environment.NewLine);
+
+            foreach (string value in gameOvr)
+            {
+                Console.WriteLine(value);
+            }
+
+            Thread.Sleep(5000);
+            Console.WriteLine();
+
+            string[] key = {
+                "                                        ",
+                "P", "r", "e", "s", "s", " ",
+                "a", "n", "y", " ",
+                "k", "e", "y", " ",
+                "t", "o", " ",
+                "c", "o", "n", "t", "i", "n", "u", "e", ":" };
+
+            for (int i = 0; i < key.Length; i++)
+            {
+                Console.Write(key[i]);
                 Thread.Sleep(350);
             }
+            Console.ReadKey();
+            Console.Clear();
+
+            Console.ForegroundColor = ConsoleColor.Cyan; // making console text color in cyan
+
 
             Console.WriteLine();
 
