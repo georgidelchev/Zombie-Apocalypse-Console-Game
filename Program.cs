@@ -1,11 +1,23 @@
 ﻿using System;
 using System.Threading;
+
+
 namespace ZombieApocalypse
 {
+    
     public class Program
     {
         public static void Main(string[] args)
         {
+            Console.Title = "Zombie Apocalypse v1.0"; // console title
+
+            // resizing console
+            for (int i = 1; i <= 120; i++)
+            {
+                Console.SetWindowSize(i, 40);
+                Thread.Sleep(20);
+            }
+
             Player player = new Player();                                    // -\
             BeginningInformation welcomeInfo = new BeginningInformation();   //   |
             Fighting fighting = new Fighting();                              //   |=> declaring the classes
@@ -13,7 +25,10 @@ namespace ZombieApocalypse
             ClearingLine clr = new ClearingLine();                           //   |
             ZombieApocalypse text = new ZombieApocalypse();                  // -/
 
+            welcomeInfo.Information();
 
+            Console.WriteLine($"Press any key to continue!");
+            Console.ReadKey(); // reading key
 
             text.Zombie(); // starting message Zombie Apocalypse + more messages
             Thread.Sleep(2000); // 2 seconds cooldown
@@ -21,13 +36,14 @@ namespace ZombieApocalypse
             welcomeInfo.WelcomeInfo(); // welcome info + more messages
             player.PlayerName(); // message to enter your name 
             welcomeInfo.Story(); // story
+
             Console.WriteLine(Environment.NewLine);
+
             Console.WriteLine($"{Player.playerName} press any key to continue!");
             Console.ReadKey(); // reading key
             clr.ClearingLines(); // clearing lines
             Console.Clear(); // clearing all the console
 
-            Thread.Sleep(2000); // 2 seconds of sleep
             Console.WriteLine($"Hello {Player.playerName}! Nice to meet you!"); // hello message
             Console.WriteLine(); // empty line
 
@@ -35,138 +51,14 @@ namespace ZombieApocalypse
             gameOver.Over(); // when game is over statistics,info etc..
         }
     }
-
     // classes \/
-    public class ZombieApocalypse
-    {
-        public void Zombie()
-        {
-            Console.ForegroundColor = ConsoleColor.Red; // making console text color in red
-            string[] zombie = new string[]
-                                        {"                                                                              ",
-                                         "                                ███████╗░█████╗░███╗░░░███╗██████╗░██╗███████╗",
-                                         "                                ╚════██║██╔══██╗████╗░████║██╔══██╗██║██╔════╝",
-                                         "                                ░░███╔═╝██║░░██║██╔████╔██║██████╦╝██║█████╗░░",
-                                         "                                ██╔══╝░░██║░░██║██║╚██╔╝██║██╔══██╗██║██╔══╝░░",
-                                         "                                ███████╗╚█████╔╝██║░╚═╝░██║██████╦╝██║███████╗",
-                                         "                                ╚══════╝░╚════╝░╚═╝░░░░░╚═╝╚═════╝░╚═╝╚══════╝",
-                                         "                                                                                                ",
-                                         "               ░█████╗░██████╗░░█████╗░░█████╗░░█████╗░██╗░░░░░██╗░░░██╗██████╗░░██████╗███████╗",
-                                         "               ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔══██╗██║░░░░░╚██╗░██╔╝██╔══██╗██╔════╝██╔════╝",
-                                         "               ███████║██████╔╝██║░░██║██║░░╚═╝███████║██║░░░░░░╚████╔╝░██████╔╝╚█████╗░█████╗░░",
-                                         "               ██╔══██║██╔═══╝░██║░░██║██║░░██╗██╔══██║██║░░░░░░░╚██╔╝░░██╔═══╝░░╚═══██╗██╔══╝░░",
-                                         "               ██║░░██║██║░░░░░╚█████╔╝╚█████╔╝██║░░██║███████╗░░░██║░░░██║░░░░░██████╔╝███████╗",
-                                         "               ╚═╝░░╚═╝╚═╝░░░░░░╚════╝░░╚════╝░╚═╝░░╚═╝╚══════╝░░░╚═╝░░░╚═╝░░░░░╚═════╝░╚══════╝"};
-
-            ClearingLine clr = new ClearingLine();
-
-            for (int i = 0; i < zombie.Length; i++)
-            {
-                for (int y = 0; y < i; y++)
-                {
-                    Console.WriteLine(zombie[y]);
-                }
-                Thread.Sleep(1000);
-                Console.Clear();
-            }
-
-            Console.WriteLine(Environment.NewLine);
-            Console.WriteLine(Environment.NewLine);
-            Console.WriteLine(Environment.NewLine);
-
-            foreach (string value in zombie)
-            {
-                Console.WriteLine(value);
-            }
-
-            Thread.Sleep(5000);
-            Console.WriteLine();
-
-            string[] key = {
-                "                                            ",
-                "P", "r", "e", "s", "s", " ",
-                "a", "n", "y", " ",
-                "k", "e", "y", " ",
-                "t", "o", " ",
-                "c", "o", "n", "t", "i", "n", "u", "e", ":" };
-
-            for (int i = 0; i < key.Length; i++)
-            {
-                Console.Write(key[i]);
-                Thread.Sleep(350);
-            }
-            Console.ReadKey();
-            Console.Clear();
-
-            Console.ForegroundColor = ConsoleColor.Cyan; // making console text color in cyan
-
-            Console.CursorVisible = false;
-            Console.SetCursorPosition(1, 1);
-            for (int i = 0; i <= 100; i++)
-            {
-                for (int y = 0; y < i; y++)
-                {
-                    Console.Write("█");
-                }
-                Console.WriteLine();
-                Console.WriteLine($"{i}/100%");
-                Console.SetCursorPosition(0, 1);
-                Thread.Sleep(100);
-            }
-
-            Thread.Sleep(2500);
-            Console.Clear();
-        }
-    }
-    public class BeginningInformation
-    {
-        public void WelcomeInfo()
-        {
-            Console.Write("Please enter your name: ");
-            Console.WriteLine();
-            Console.Write(">> ");
-        }
-        public void Information()
-        {
-            // TODO ADD INFORMATION
-        }
-        public void Story()
-        {
-            Console.WriteLine();
-            Console.CursorVisible = false;
-            string[] first = {$"{Player.playerName}"," ","you"," ","are"," ","a"," ","cop"," ",
-                "shooted"," ","by"," ","a"," ","thief",".","\n", // first line
-            "You've"," ","been",""," ","in"," ","a"," ","hospital"," ",
-                "for"," ","ten"," ","months"," ","in"," ","a"," ","coma",".","\n", // second line
-            "One"," ","day"," ","you"," ","wake"," ","up",","," ","but"," ",
-                "there"," ","is"," ","no"," ","one",".","\n", // third line
-                "You"," ","decided"," ","to"," ","look"," ","around","."," ",
-                "You"," ","took"," ","your"," ","clothes"," ","and"," ","dressed"," ",
-                "then"," ","you"," ","toured"," ","the"," ","hospital",".","\n", // forth line
-                "YIKES"," ","the"," ","hospital"," ","is"," ","ruined",","," ",
-                "full"," ","of"," ","dead"," ","bodies",".","\n",// fifth line
-                "Lets's"," ","go"," ","Outside"," ",$"{Player.playerName}",".","\n", //sixth line
-                "There"," ","is"," ","full"," ","of"," ","crashed"," ","cars",","," ","bodies,","\n",
-                "dirty"," ","streets"," ","and"," ","ruined"," ","houses",".",".",".","\n", //seventh line
-                "What"," ","is"," ","happening"," ","here","???","\n",//eighth line
-                "Let's"," ","find"," ","out"," ","and"," ","try"," ","to"," ","survive"," ","this.",
-            };
-
-            for (int i = 0; i < first.Length; i++)
-            {
-                Console.Write($"{first[i]}");
-                Thread.Sleep(130);
-            }
-        }
-    }
     public class Player
     {
         // PLAYER STATS
-        public static string playerName = "hab";  // the name of the Player       
-        public static double playerFood = 10;  // amount of food that Player have
+        public static string playerName;  // the name of the Player       
+        public static double playerFood = 30;  // amount of food that Player have
         public static double playerHunger = 100;
         public static double playerHealth = 175; // health of the player
-        public static string playerGear;  // current Player gear
         public static double playerCoins = 25; // current Player coins
         public static int playerLevel = 0; // current Player level
         public static int currentPlayerLevel = playerLevel;
@@ -177,6 +69,7 @@ namespace ZombieApocalypse
         public static string currentBoots = string.Empty;
         public static double playerDeffence = 50;
         public static double fuel = 200;
+
         // RANDOMIZED WEAPON
         public static int playerWeapon;   // player's weapon randomized
 
@@ -199,14 +92,15 @@ namespace ZombieApocalypse
 
         public static string[] weapons = { "Shotgun", "M4", "Machete" };
 
-
         public static double weaponClassCheck = 0;
         double maxClass = double.MinValue;
+
         public void PlayerName()
         {
             playerName = Console.ReadLine(); // entering the name of the Player
 
         }
+
         public void PlayerWeapon() // choosing randomly an weapon
         {
             playerWeapon = new Random().Next(1, 100); // dropping chance
@@ -267,6 +161,7 @@ namespace ZombieApocalypse
         public static double carDeffence;
 
         public static int carType = new Random().Next(1, 6);
+
         public void CarType()
         {
             switch (carType)
@@ -314,7 +209,6 @@ namespace ZombieApocalypse
         public static double kidCoins = 50; // current Kid coins
 
         public static int kidWeapon;
-
 
         public static string currentKidHelmet = string.Empty;
         public static string currentKidChestplate = string.Empty;
@@ -372,9 +266,10 @@ namespace ZombieApocalypse
         public static bool isPlayerHaveKidHelper = false;
         public static bool isPlayerHaveDogHelper = false;
         public static bool isPlayerHaveAnCar = false;
+
         public static double dogDamage = 25;
         public static double dogHealth = 100;
-        public static string dogName = "ReX";
+        public static string dogName = "Rex";
         public static double dogHunger = 100;
 
         public void KidHelper()
@@ -384,6 +279,7 @@ namespace ZombieApocalypse
             Console.WriteLine("[0] Save him!");
             Console.WriteLine("[1] Leave him alone...");
             Console.Write(">> ");
+
             int choice = int.Parse(Console.ReadLine());
             while (choice < 0 || choice > 1)
             {
@@ -391,6 +287,7 @@ namespace ZombieApocalypse
                 Console.Write(">> ");
                 choice = int.Parse(Console.ReadLine());
             }
+
             if (choice == 0)
             {
                 Console.WriteLine($"Good job {Player.playerName}.");
@@ -410,7 +307,6 @@ namespace ZombieApocalypse
                     Kid kid = new Kid();
                     kid.KidWeapon();
                 }
-
             }
             else if (choice == 1)
             {
@@ -418,8 +314,10 @@ namespace ZombieApocalypse
                 Thread.Sleep(2000);
                 Console.WriteLine("How can you leave him ...");
                 Thread.Sleep(3000);
+
                 int minusRandomFood = new Random().Next(1, 5);
                 int lostFood = 0;
+
                 switch (minusRandomFood)
                 {
                     case 1:
@@ -443,6 +341,7 @@ namespace ZombieApocalypse
                         lostFood = 12;
                         break;
                 }
+
                 Console.WriteLine($"{Player.playerName} you lost {lostFood} food for this...");
                 Player.playerFood -= lostFood;
                 Thread.Sleep(1500);
@@ -450,6 +349,7 @@ namespace ZombieApocalypse
                 Console.WriteLine();
             }
         }
+
         public void DogHelper()
         {
             Console.WriteLine($"The dog is appreciated to you {Player.playerName} !");
@@ -469,6 +369,7 @@ namespace ZombieApocalypse
                     break;
             }
         }
+
         public void PlayersCar()
         {
             Console.WriteLine($"{Player.playerName} you found an car!");
@@ -659,61 +560,69 @@ namespace ZombieApocalypse
         public static string zombieType = string.Empty;     // the type of the Zombie
         public static double zombieDamage = 0;                 // damage of the Zombie
         public static double zombieHealth = 0;                 // health of the Zombie       
+
         public void BabyZombie()
         {
             zombieType = "Baby Zombie";
             zombieDamage = 5;
             zombieHealth = 10;
         }
+
         public void CommonZombie()
         {
             zombieType = "Common Zombie";
             zombieDamage = 10;
             zombieHealth = 20;
         }
+
         public void LittleZombie()
         {
             zombieType = "Little Zombie";
             zombieDamage = 15;
             zombieHealth = 30;
         }
+
         public void MediumZombie()
         {
             zombieType = "Medium Zombie";
             zombieDamage = 20;
             zombieHealth = 40;
         }
+
         public void HighZombie()
         {
             zombieType = "High Zombie";
             zombieDamage = 25;
             zombieHealth = 50;
         }
+
         public void AngryZombie()
         {
             zombieType = "Angry Zombie";
             zombieDamage = 27;
             zombieHealth = 60;
         }
+
         public void PoisonedZombie()
         {
             zombieType = "Poisoned Zombie";
             zombieDamage = 28;
             zombieHealth = 70;
         }
+
         public void ZombieWithKnife()
         {
             zombieType = "Zombie with an knife";
             zombieDamage = 29;
             zombieHealth = 80;
         }
+
         public void ZombieBoss()
         {
             zombieType = "Zombie BOSS";
             zombieDamage = 30;
             zombieHealth = 100;
         }
-
     }
     public class Fighting
     {
@@ -739,7 +648,6 @@ namespace ZombieApocalypse
                 }
 
                 actionType = new Random().Next(1, 9);
-
 
                 bool isPlayerWinner = false;
                 switch (actionType)
@@ -772,7 +680,7 @@ namespace ZombieApocalypse
                         zombieTypes.ZombieWithKnife();
                         break;
 
-                } // Under working !
+                }
 
                 if (actionType != 1)
                 {
@@ -793,12 +701,16 @@ namespace ZombieApocalypse
                         {
                             Player.playerHunger = 0;
                         }
+
                         Console.WriteLine($"Consume some food {Player.playerName}?" +
                         $"{Environment.NewLine}Your hunger bar is : {Player.playerHunger}/100");
+
                         Console.WriteLine($"{Player.playerName} you have {Player.playerFood} food");
+
                         Console.WriteLine($"[0] - CONSUME");
                         Console.WriteLine($"[1] - DONT CONSUME");
                         Console.Write(">> ");
+
                         int eating = int.Parse(Console.ReadLine());
                         while (eating < 0 || eating > 1)
                         {
@@ -806,6 +718,7 @@ namespace ZombieApocalypse
                             Console.Write(">> ");
                             eating = int.Parse(Console.ReadLine());
                         }
+
                         if (eating == 0)
                         {
                             if (Player.playerFood <= 0)
@@ -852,6 +765,7 @@ namespace ZombieApocalypse
                         Console.WriteLine();
                         Console.WriteLine("[0] TAKE A RIDE");
                         Console.WriteLine("[0] DONT");
+
                         int rideChoice = int.Parse(Console.ReadLine());
                         while (rideChoice < 0 || rideChoice > 1)
                         {
@@ -874,6 +788,12 @@ namespace ZombieApocalypse
                             Console.WriteLine("     S");
 
                             int way = int.Parse(Console.ReadLine());
+                            while (way < 0 || way > 3)
+                            {
+                                Console.WriteLine($"Please enter an valid operation-{Player.playerName}! :");
+                                way = int.Parse(Console.ReadLine());
+                            }
+
                             switch (way)
                             {
                                 case 0:
@@ -882,6 +802,8 @@ namespace ZombieApocalypse
                                     Console.WriteLine($"-{Car.carFuel} fuel , Current fuel: {Player.fuel}");
                                     Player.fuel -= Car.carFuel;
                                     Thread.Sleep(5000);
+                                    Console.WriteLine();
+                                    
                                     Console.WriteLine($"{Player.playerName} you've found:");
                                     Console.WriteLine("+25 Food");
                                     Console.WriteLine("+25 Defence items");
@@ -897,6 +819,8 @@ namespace ZombieApocalypse
                                     Console.WriteLine($"-{Car.carFuel} fuel , Current fuel: {Player.fuel}");
                                     Player.fuel -= Car.carFuel;
                                     Thread.Sleep(5000);
+                                    Console.WriteLine();
+                                    
                                     Console.WriteLine($"{Player.playerName} you've found:");
                                     Console.WriteLine("+65 Food");
                                     Console.WriteLine("+15 Defence items");
@@ -912,6 +836,8 @@ namespace ZombieApocalypse
                                     Console.WriteLine($"-{Car.carFuel} fuel , Current fuel: {Player.fuel}");
                                     Player.fuel -= Car.carFuel;
                                     Thread.Sleep(5000);
+                                    Console.WriteLine();
+                                    
                                     Console.WriteLine($"{Player.playerName} you've found:");
                                     Console.WriteLine("+52 Food");
                                     Console.WriteLine("+35 Defence items");
@@ -927,6 +853,8 @@ namespace ZombieApocalypse
                                     Console.WriteLine($"-{Car.carFuel} fuel , Current fuel: {Player.fuel}");
                                     Player.fuel -= Car.carFuel;
                                     Thread.Sleep(5000);
+                                    Console.WriteLine();
+                                    
                                     Console.WriteLine($"{Player.playerName} you've found:");
                                     Console.WriteLine("+142 Food");
                                     Console.WriteLine("+52 Defence items");
@@ -948,6 +876,7 @@ namespace ZombieApocalypse
                                               $"Chestplate: [{Player.currentChestplate}] | " +
                                               $"Pants: [{Player.currentPants}] | " +
                                               $"Boots: [{Player.currentBoots}]");
+                    
                     Console.WriteLine();
 
                     Console.WriteLine($"Player LVL: [{Player.playerLevel}]  -  EXP: [{Player.playerExp}/100]                                                            ");
@@ -984,6 +913,7 @@ namespace ZombieApocalypse
 
                     double diff = 0;
                     PlayerHelper helper = new PlayerHelper();
+                    
                     if (actionToDo == 0) // fighting with the zombies
                     {
                         while (isPlayerAlive && !isPlayerWinner)
@@ -1046,6 +976,7 @@ namespace ZombieApocalypse
                             {
                                 Player.playerDeffence = 0;
                             }
+                            
                             if (Player.playerHealth <= 0)
                             {
                                 Console.WriteLine($"Sorry {Player.playerName} .. you are dead.");
@@ -1058,6 +989,7 @@ namespace ZombieApocalypse
                                 Console.WriteLine($"Good job {Player.playerName} , you killed" +
                                     $"{Environment.NewLine}successfully {ZombiesTypes.zombieType}.");
                                 Console.WriteLine();
+                                
                                 Console.WriteLine($"{Player.playerName} your reward is:");
                                 Console.WriteLine($"+30 Food");
                                 Console.WriteLine($"+10 Health");
@@ -1078,7 +1010,9 @@ namespace ZombieApocalypse
                                     string[] leveledUp = { "Y", "O", "U ",
                                                 "L", "E", "V", "E", "L", "E", "D ",
                                                 "U","P", ", ", "C", "O", "N", "G", "R","A","T","S",};
+                                    
                                     Console.WriteLine();
+                                    
                                     for (int i = 0; i < leveledUp.Length; i++)
                                     {
                                         Console.Write($"{leveledUp[i]}");
@@ -1130,7 +1064,6 @@ namespace ZombieApocalypse
                                     break;
                             }
 
-
                             if (Player.playerHunger < 0)
                             {
                                 Player.playerHealth -= 5;
@@ -1143,6 +1076,7 @@ namespace ZombieApocalypse
                     else if (actionToDo == 1) // running away
                     {
                         int didPlayerTookDamage = new Random().Next(1, 4);
+                        
                         if (didPlayerTookDamage == 1 || didPlayerTookDamage == 2)
                         {
                             Console.WriteLine($"{Player.playerName} ran away from these successfully " +
@@ -1155,6 +1089,7 @@ namespace ZombieApocalypse
                             Console.WriteLine($"Oh {Player.playerName}.... you were too slow..");
                             Console.WriteLine($"You took {took} damage.");
                         }
+                        
                         if (Player.playerHealth <= 0)
                         {
                             Console.WriteLine($"Sorry {Player.playerName} .. you are dead.");
@@ -1196,6 +1131,7 @@ namespace ZombieApocalypse
                     else if (actionToDo == 2) // hiding somewhere
                     {
                         int didPlayerHided = new Random().Next(1, 4);
+                       
                         if (didPlayerHided == 1 || didPlayerHided == 2 || didPlayerHided == 3 || didPlayerHided == 4)
                         {
                             int wherePlayerHided = new Random().Next(1, 8);
@@ -1236,6 +1172,7 @@ namespace ZombieApocalypse
                                 case 1:
                                 case 2:
                                     Console.WriteLine($"{Player.playerName} you just hided in the bushes.");
+                                    
                                     if (didHeTookDamage == 1 || didHeTookDamage == 2)
                                     {
                                         Console.WriteLine($"With minor injuries -10 health.");
@@ -1272,6 +1209,7 @@ namespace ZombieApocalypse
                                 case 3:
                                 case 4:
                                     Console.WriteLine($"{Player.playerName} you just hided behind a car.");
+                                    
                                     if (didHeTookDamage == 1 || didHeTookDamage == 2)
                                     {
                                         Console.WriteLine($"With minor injuries -10 health.");
@@ -1289,6 +1227,7 @@ namespace ZombieApocalypse
                                 case 5:
                                 case 6:
                                     Console.WriteLine($"{Player.playerName} you just hided in a shop.");
+                                    
                                     if (didHeTookDamage == 1 || didHeTookDamage == 2)
                                     {
                                         Console.WriteLine($"With minor injuries -10 health.");
@@ -1298,6 +1237,7 @@ namespace ZombieApocalypse
                                     {
                                         Console.WriteLine("Without any injuries.");
                                     }
+                                    
                                     int didHeFoundSomething = new Random().Next(1, 2);
                                     switch (didHeFoundSomething)
                                     {
@@ -1352,6 +1292,7 @@ namespace ZombieApocalypse
                                 case 7:
                                 case 8:
                                     Console.WriteLine($"{Player.playerName} you just hided in a house.");
+                                    
                                     if (didHeTookDamage == 1 || didHeTookDamage == 2)
                                     {
                                         Console.WriteLine($"With minor injuries -10 health.");
@@ -1377,9 +1318,6 @@ namespace ZombieApocalypse
                                 isPlayerAlive = false;
                                 break;
                             }
-
-
-
                         }
                     }
                 }
@@ -1395,6 +1333,7 @@ namespace ZombieApocalypse
 
             Console.CursorVisible = false;
             Console.ForegroundColor = ConsoleColor.Red; // making console text color in red
+            
             string[] gameOvr = new string[]
                                         {"                                                                          ",
                                          "                                      ░██████╗░░█████╗░███╗░░░███╗███████╗",
@@ -1426,6 +1365,7 @@ namespace ZombieApocalypse
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Environment.NewLine);
             Console.Clear();
+            
             foreach (string value in gameOvr)
             {
                 Console.WriteLine(value);
@@ -1446,6 +1386,7 @@ namespace ZombieApocalypse
                 Console.Write(key[i]);
                 Thread.Sleep(350);
             }
+            
             Console.ReadKey();
             Console.Clear();
 
@@ -1476,7 +1417,6 @@ namespace ZombieApocalypse
             Console.WriteLine();
             Console.WriteLine($"   ■ Taken Damage: [{Player.tookDamage}]");
             Console.WriteLine($"   ■ Dealed Damage: [{Player.dealtDamage}]");
-
         }
     }
     public class Shop
@@ -1487,6 +1427,7 @@ namespace ZombieApocalypse
             Console.WriteLine($"Do you want to look at the shop?");
             Console.WriteLine("[0] - YES");
             Console.WriteLine("[1] - NO");
+
             int shopChoice = int.Parse(Console.ReadLine());
             while (shopChoice < 0 || shopChoice > 1)
             {
@@ -1494,13 +1435,15 @@ namespace ZombieApocalypse
                 Console.Write(">> ");
                 shopChoice = int.Parse(Console.ReadLine());
             }
+
             switch (shopChoice)
             {
                 case 0:
                     Console.WriteLine("[0] - ARMORS");
                     Console.WriteLine("[1] - WEAPONS");
                     Console.WriteLine("[2] - FOOD/FUEL");
-                    Console.WriteLine("[3] - EXIT");
+                    Console.WriteLine("[3] - ENERGY DRINKS");
+                    Console.WriteLine("[4] - EXIT");
                     Console.Write(">> ");
 
                     int pick = int.Parse(Console.ReadLine());
@@ -1510,14 +1453,14 @@ namespace ZombieApocalypse
                         Console.Write(">> ");
                         pick = int.Parse(Console.ReadLine());
                     }
+
                     if (pick == 0)
                     {
-
                         Console.WriteLine("What you want to buy?");
                         Console.WriteLine();
                         Console.WriteLine($"      ╔══════════════════════╗");
-                        Console.WriteLine($"      ║ Current gold: " +
-                                                    $"{Player.playerCoins}    ║");
+                        Console.WriteLine($"        Current gold: " +
+                                                    $"{Player.playerCoins}    ");
                         Console.WriteLine($"      ╚══════════════════════╝");
                         Console.WriteLine($"╔════════════════════════════════╗");
                         Console.WriteLine($"║       #=# ARMORS MENU #=#      ║");
@@ -1540,6 +1483,7 @@ namespace ZombieApocalypse
                             Console.Write(">> ");
                             order = int.Parse(Console.ReadLine());
                         }
+
                         if (order == 4)
                         {
                             goto case 0;
@@ -1624,13 +1568,13 @@ namespace ZombieApocalypse
                             }
                         }
                     }
-                    if (pick == 1)
+                    else if (pick == 1)
                     {
                         Console.WriteLine("What you want to buy?");
                         Console.WriteLine();
                         Console.WriteLine($"      ╔══════════════════════╗");
-                        Console.WriteLine($"      ║ Current gold: " +
-                                                    $"{Player.playerCoins}    ║");
+                        Console.WriteLine($"        Current gold: " +
+                                                    $"{Player.playerCoins}     ");
                         Console.WriteLine($"      ╚══════════════════════╝");
                         Console.WriteLine($"╔════════════════════════════════╗");
                         Console.WriteLine($"║      #=# WEAPONS MENU #=#      ║");
@@ -1726,13 +1670,13 @@ namespace ZombieApocalypse
                         }
 
                     }
-                    if (pick == 2)
+                    else if (pick == 2)
                     {
                         Console.WriteLine("What you want to buy?");
                         Console.WriteLine();
                         Console.WriteLine($"      ╔══════════════════════╗");
-                        Console.WriteLine($"      ║ Current gold: " +
-                                                    $"{Player.playerCoins}    ║");
+                        Console.WriteLine($"        Current gold: " +
+                                                    $"{Player.playerCoins}     ");
                         Console.WriteLine($"      ╚══════════════════════╝");
                         Console.WriteLine($"╔════════════════════════════════╗");
                         Console.WriteLine($"║     #=# FOOD/FUEL MENU #=#     ║");
@@ -1752,7 +1696,7 @@ namespace ZombieApocalypse
                         Console.WriteLine($"   [5] - EXIT | [6] - PREV. PAGE  ");
 
                         int order = int.Parse(Console.ReadLine());
-                        while (order < 0 || order > 4)
+                        while (order < 0 || order > 6)
                         {
                             Console.WriteLine($"Please enter an valid operation-{Player.playerName}! :");
                             Console.Write(">> ");
@@ -1838,6 +1782,86 @@ namespace ZombieApocalypse
                             }
                         }
                     }
+                    else if (pick == 3)
+                    {
+                        Console.WriteLine("What you want to buy?");
+                        Console.WriteLine();
+                        Console.WriteLine($"      ╔══════════════════════╗");
+                        Console.WriteLine($"        Current gold: " +
+                                                    $"{Player.playerCoins}     ");
+                        Console.WriteLine($"      ╚══════════════════════╝");
+                        Console.WriteLine($"╔════════════════════════════════╗");
+                        Console.WriteLine($"║   #=# ENERGY DRINKS MENU #=#   ║");
+                        Console.WriteLine($"║════════════════════════════════║");
+                        Console.WriteLine($"║[0] -  10 Cans - [100G]         ║");
+                        Console.WriteLine($"║          [+25 HP]              ║");
+                        Console.WriteLine($"║[1] -  25 Cans - [200G]         ║");
+                        Console.WriteLine($"║          [+65 HP]              ║");
+                        Console.WriteLine($"║[2] -  50 Cans - [330G]         ║");
+                        Console.WriteLine($"║          [+100 HP]             ║");
+                        Console.WriteLine($"╚════════════════════════════════╝");
+                        Console.WriteLine($"   [3] - EXIT | [4] - PREV. PAGE  ");
+                        int order = int.Parse(Console.ReadLine());
+                        while (order < 0 || order > 4)
+                        {
+                            Console.WriteLine($"Please enter an valid operation-{Player.playerName}! :");
+                            Console.Write(">> ");
+                            order = int.Parse(Console.ReadLine());
+                        }
+
+                        if (order == 4)
+                        {
+                            goto case 0;
+                        }
+                        else if (order == 3)
+                        {
+                            break;
+                        }
+                        else if (order == 2)
+                        {
+                            if (Player.playerCoins >= 330)
+                            {
+                                Console.WriteLine($"{Player.playerName} you just bought 50 Cans!");
+                                Player.playerCoins -= 330;
+                                Player.playerHealth += 100;
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{Player.playerName} you dont have enough money!" +
+                                    $"{Environment.NewLine}You need {330 - Player.playerCoins} more");
+                            }
+                        }
+                        else if (order == 1)
+                        {
+                            if (Player.playerCoins >= 200)
+                            {
+                                Console.WriteLine($"{Player.playerName} you just bought 20 Cans!");
+                                Player.playerCoins -= 200;
+                                Player.playerHealth += 65;
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{Player.playerName} you dont have enough money!" +
+                                    $"{Environment.NewLine}You need {200 - Player.playerCoins} more");
+                            }
+                        }
+                        else if (order == 0)
+                        {
+                            if (Player.playerCoins >= 100)
+                            {
+                                Console.WriteLine($"{Player.playerName} you just bought 10 Cans!");
+                                Player.playerCoins -= 100;
+                                Player.playerHealth += 25;
+                            }
+                            else
+                            {
+                                Console.WriteLine($"{Player.playerName} you dont have enough money!" +
+                                    $"{Environment.NewLine}You need {110 - Player.playerCoins} more");
+                            }
+                        }
+
+                    }
+
                     break;
             }
         }
@@ -1853,4 +1877,144 @@ namespace ZombieApocalypse
             Console.SetCursorPosition(0, Console.CursorTop);
         }
     }
+    public class ZombieApocalypse
+    {
+        public void Zombie()
+        {
+            Console.ForegroundColor = ConsoleColor.Red; // making console text color in red
+            
+            string[] zombie = new string[]
+                                        {"                                                                              ",
+                                         "                                ███████╗░█████╗░███╗░░░███╗██████╗░██╗███████╗",
+                                         "                                ╚════██║██╔══██╗████╗░████║██╔══██╗██║██╔════╝",
+                                         "                                ░░███╔═╝██║░░██║██╔████╔██║██████╦╝██║█████╗░░",
+                                         "                                ██╔══╝░░██║░░██║██║╚██╔╝██║██╔══██╗██║██╔══╝░░",
+                                         "                                ███████╗╚█████╔╝██║░╚═╝░██║██████╦╝██║███████╗",
+                                         "                                ╚══════╝░╚════╝░╚═╝░░░░░╚═╝╚═════╝░╚═╝╚══════╝",
+                                         "                                                                                                ",
+                                         "               ░█████╗░██████╗░░█████╗░░█████╗░░█████╗░██╗░░░░░██╗░░░██╗██████╗░░██████╗███████╗",
+                                         "               ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██╔══██╗██║░░░░░╚██╗░██╔╝██╔══██╗██╔════╝██╔════╝",
+                                         "               ███████║██████╔╝██║░░██║██║░░╚═╝███████║██║░░░░░░╚████╔╝░██████╔╝╚█████╗░█████╗░░",
+                                         "               ██╔══██║██╔═══╝░██║░░██║██║░░██╗██╔══██║██║░░░░░░░╚██╔╝░░██╔═══╝░░╚═══██╗██╔══╝░░",
+                                         "               ██║░░██║██║░░░░░╚█████╔╝╚█████╔╝██║░░██║███████╗░░░██║░░░██║░░░░░██████╔╝███████╗",
+                                         "               ╚═╝░░╚═╝╚═╝░░░░░░╚════╝░░╚════╝░╚═╝░░╚═╝╚══════╝░░░╚═╝░░░╚═╝░░░░░╚═════╝░╚══════╝"};
+
+            ClearingLine clr = new ClearingLine();
+
+            for (int i = 0; i < zombie.Length; i++)
+            {
+                for (int y = 0; y < i; y++)
+                {
+                    Console.WriteLine(zombie[y]);
+                }
+                Thread.Sleep(1000);
+                Console.Clear();
+            }
+
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(Environment.NewLine);
+
+            foreach (string value in zombie)
+            {
+                Console.WriteLine(value);
+            }
+
+            Thread.Sleep(5000);
+            Console.WriteLine();
+
+            string[] key = {
+                "                                            ",
+                "P", "r", "e", "s", "s", " ",
+                "a", "n", "y", " ",
+                "k", "e", "y", " ",
+                "t", "o", " ",
+                "c", "o", "n", "t", "i", "n", "u", "e", ":" };
+
+            for (int i = 0; i < key.Length; i++)
+            {
+                Console.Write(key[i]);
+                Thread.Sleep(350);
+            }
+            Console.ReadKey();
+            Console.Clear();
+
+            Console.ForegroundColor = ConsoleColor.Cyan; // making console text color in cyan
+
+            Console.CursorVisible = false;
+            Console.SetCursorPosition(1, 1);
+            
+            for (int i = 0; i <= 100; i++)
+            {
+                for (int y = 0; y < i; y++)
+                {
+                    Console.Write("█");
+                }
+                Console.WriteLine();
+                Console.WriteLine($"{i}/100%");
+                Console.SetCursorPosition(0, 1);
+                Thread.Sleep(100);
+            }
+
+            Thread.Sleep(2500);
+            Console.Clear();
+        }
+    }
+    public class BeginningInformation
+    {
+        public void WelcomeInfo()
+        {
+            Console.Write("Please enter your name: ");
+            Console.WriteLine();
+            Console.Write(">> ");
+        }
+        public void Information()
+        {
+            Console.WriteLine("This is zombie apocalypse game , you will fight with several zombies with different difficulty.");
+            Thread.Sleep(1500);
+            Console.WriteLine("There is a chance to find a car,kid and a dog.");
+            Thread.Sleep(1500);
+            Console.WriteLine("With the car you can go to 4 locations with different rewards each.");
+            Thread.Sleep(1500);
+            Console.WriteLine("When you find a kid,he will be your partner in this journey.He is dealing bonus damage to the monsters.");
+            Thread.Sleep(1500);
+            Console.WriteLine("When you find a dog he also will be your partner , he is dealing some damage to the zombies and eating some of your food");
+            Thread.Sleep(1500);
+            Console.WriteLine("Good luck!");
+            Thread.Sleep(1500);
+            Console.WriteLine();
+        }
+        public void Story()
+        {
+            Console.Clear();
+            Console.WriteLine();
+            
+            Console.CursorVisible = false;
+            
+            string[] first = {$"{Player.playerName}"," ","you"," ","are"," ","a"," ","cop"," ",
+                "shooted"," ","by"," ","a"," ","thief",".","\n", // first line
+            "You've"," ","been",""," ","in"," ","a"," ","hospital"," ",
+                "for"," ","ten"," ","months"," ","in"," ","a"," ","coma",".","\n", // second line
+            "One"," ","day"," ","you"," ","wake"," ","up",","," ","but"," ",
+                "there"," ","is"," ","no"," ","one",".","\n", // third line
+                "You"," ","decided"," ","to"," ","look"," ","around","."," ",
+                "You"," ","took"," ","your"," ","clothes"," ","and"," ","dressed"," ",
+                "then"," ","you"," ","toured"," ","the"," ","hospital",".","\n", // forth line
+                "YIKES"," ","the"," ","hospital"," ","is"," ","ruined",","," ",
+                "full"," ","of"," ","dead"," ","bodies",".","\n",// fifth line
+                "Lets's"," ","go"," ","Outside"," ",$"{Player.playerName}",".","\n", //sixth line
+                "There"," ","is"," ","full"," ","of"," ","crashed"," ","cars",","," ","bodies,","\n",
+                "dirty"," ","streets"," ","and"," ","ruined"," ","houses",".",".",".","\n", //seventh line
+                "What"," ","is"," ","happening"," ","here","???","\n",//eighth line
+                "Let's"," ","find"," ","out"," ","and"," ","try"," ","to"," ","survive"," ","this.",
+            };
+
+            for (int i = 0; i < first.Length; i++)
+            {
+                Console.Write($"{first[i]}");
+                Thread.Sleep(130);
+            }
+        }
+    }
+
 }
