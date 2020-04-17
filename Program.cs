@@ -763,7 +763,7 @@ namespace ZombieApocalypse
 
                         Console.WriteLine();
                         Console.WriteLine("[0] TAKE A RIDE");
-                        Console.WriteLine("[0] DONT");
+                        Console.WriteLine("[1] DONT");
 
                         int rideChoice = int.Parse(Console.ReadLine());
                         while (rideChoice < 0 || rideChoice > 1)
