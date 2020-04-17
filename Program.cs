@@ -1,27 +1,27 @@
-﻿using System;//Thread.Sleep
+﻿using System;
 using System.Threading;
-namespace TEST
+namespace ZombieApocalypse
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            ZombieApocalypse text = new ZombieApocalypse();
-            text.Zombie(); // starting message Zombie Apocalypse + more messages
-
             Player player = new Player();                                    // -\
             BeginningInformation welcomeInfo = new BeginningInformation();   //   |
             Fighting fighting = new Fighting();                              //   |=> declaring the classes
             GameOver gameOver = new GameOver();                              //   |
-            ClearingLine clr = new ClearingLine();                           // -/
+            ClearingLine clr = new ClearingLine();                           //   |
+            ZombieApocalypse text = new ZombieApocalypse();                  // -/
 
 
+
+            //text.Zombie(); // starting message Zombie Apocalypse + more messages
             Thread.Sleep(2000); // 2 seconds cooldown
-            Console.WriteLine(); // empty line
+
             welcomeInfo.WelcomeInfo(); // welcome info + more messages
             player.PlayerName(); // message to enter your name 
-
-
+            welcomeInfo.Story(); // story
+            Console.WriteLine(Environment.NewLine);
             Console.WriteLine($"{Player.playerName} press any key to continue!");
             Console.ReadKey(); // reading key
             clr.ClearingLines(); // clearing lines
@@ -132,16 +132,37 @@ namespace TEST
         }
         public void Story()
         {
-            // TODO ADD STORY !!
-            Console.WriteLine("an test of STORY!");  // testing
-            Console.WriteLine(Player.playerName);    // testing
-            Console.WriteLine(Player.playerFood -= 5); // testing
+            Console.WriteLine();
+            Console.CursorVisible = false;
+            string[] first = {$"{Player.playerName}"," ","you"," ","are"," ","a"," ","cop"," ",
+                "shooted"," ","by"," ","a"," ","thief",".","\n", // first line
+            "You've"," ","been",""," ","in"," ","a"," ","hospital"," ",
+                "for"," ","ten"," ","months"," ","in"," ","a"," ","coma",".","\n", // second line
+            "One"," ","day"," ","you"," ","wake"," ","up",","," ","but"," ",
+                "there"," ","is"," ","no"," ","one",".","\n", // third line
+                "You"," ","decided"," ","to"," ","look"," ","around","."," ",
+                "You"," ","took"," ","your"," ","clothes"," ","and"," ","dressed"," ",
+                "then"," ","you"," ","toured"," ","the"," ","hospital",".","\n", // forth line
+                "YIKES"," ","the"," ","hospital"," ","is"," ","ruined",","," ",
+                "full"," ","of"," ","dead"," ","bodies",".","\n",// fifth line
+                "Lets's"," ","go"," ","Outside"," ",$"{Player.playerName}",".","\n", //sixth line
+                "There"," ","is"," ","full"," ","of"," ","crashed"," ","cars",","," ","bodies,","\n",
+                "dirty"," ","streets"," ","and"," ","ruined"," ","houses",".",".",".","\n", //seventh line
+                "What"," ","is"," ","happening"," ","here","???","\n",//eighth line
+                "Let's"," ","find"," ","out"," ","and"," ","try"," ","to"," ","survive"," ","this.",
+            };
+
+            for (int i = 0; i < first.Length; i++)
+            {
+                Console.Write($"{first[i]}");
+                Thread.Sleep(130);
+            }
         }
     }
     public class Player
     {
         // PLAYER STATS
-        public static string playerName;  // the name of the Player       
+        public static string playerName = "hab";  // the name of the Player       
         public static double playerFood = 10;  // amount of food that Player have
         public static double playerHunger = 100;
         public static double playerHealth = 0; // health of the player
@@ -1367,48 +1388,50 @@ namespace TEST
     {
         public void Over()
         {
+            Console.Clear();
 
+            Console.CursorVisible = false;
             Console.ForegroundColor = ConsoleColor.Red; // making console text color in red
             string[] gameOvr = new string[]
-                                        {"                                                                    ",
-                                         "                                ░██████╗░░█████╗░███╗░░░███╗███████╗",
-                                         "                                ██╔════╝░██╔══██╗████╗░████║██╔════╝",
-                                         "                                ██║░░██╗░███████║██╔████╔██║█████╗░░",
-                                         "                                ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░",
-                                         "                                ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗",
-                                         "                                ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝",
-                                         "                                                                   ",
-                                         "                                  ░█████╗░██╗░░░██╗███████╗██████╗░",
-                                         "                                  ██╔══██╗██║░░░██║██╔════╝██╔══██╗",
-                                         "                                  ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝",
-                                         "                                  ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗",
-                                         "                                  ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║",
-                                         "                                  ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝"};
+                                        {"                                                                          ",
+                                         "                                      ░██████╗░░█████╗░███╗░░░███╗███████╗",
+                                         "                                      ██╔════╝░██╔══██╗████╗░████║██╔════╝",
+                                         "                                      ██║░░██╗░███████║██╔████╔██║█████╗░░",
+                                         "                                      ██║░░╚██╗██╔══██║██║╚██╔╝██║██╔══╝░░",
+                                         "                                      ╚██████╔╝██║░░██║██║░╚═╝░██║███████╗",
+                                         "                                      ░╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚══════╝",
+                                         "                                                                         ",
+                                         "                                        ░█████╗░██╗░░░██╗███████╗██████╗░",
+                                         "                                        ██╔══██╗██║░░░██║██╔════╝██╔══██╗",
+                                         "                                        ██║░░██║╚██╗░██╔╝█████╗░░██████╔╝",
+                                         "                                        ██║░░██║░╚████╔╝░██╔══╝░░██╔══██╗",
+                                         "                                        ╚█████╔╝░░╚██╔╝░░███████╗██║░░██║",
+                                         "                                        ░╚════╝░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝"};
 
-            for (int i = 0; i < gameOvr.Length; i++)
+            for (int i = 0; i < 5; i++)
             {
-                for (int y = 0; y < i; y++)
+                foreach (string value in gameOvr)
                 {
-                    Console.WriteLine(gameOvr[y]);
+                    Console.WriteLine(value);
                 }
                 Thread.Sleep(1000);
                 Console.Clear();
+                Thread.Sleep(1000);
             }
 
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Environment.NewLine);
-
+            Console.Clear();
             foreach (string value in gameOvr)
             {
                 Console.WriteLine(value);
             }
-
             Thread.Sleep(5000);
             Console.WriteLine();
 
             string[] key = {
-                "                                        ",
+                "                                            ",
                 "P", "r", "e", "s", "s", " ",
                 "a", "n", "y", " ",
                 "k", "e", "y", " ",
@@ -1424,8 +1447,6 @@ namespace TEST
             Console.Clear();
 
             Console.ForegroundColor = ConsoleColor.Cyan; // making console text color in cyan
-
-
             Console.WriteLine();
 
             Console.WriteLine($"╔════════════════════════════════╗");
