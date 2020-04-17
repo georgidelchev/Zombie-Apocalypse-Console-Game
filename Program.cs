@@ -15,7 +15,7 @@ namespace ZombieApocalypse
 
 
 
-            //text.Zombie(); // starting message Zombie Apocalypse + more messages
+            text.Zombie(); // starting message Zombie Apocalypse + more messages
             Thread.Sleep(2000); // 2 seconds cooldown
 
             welcomeInfo.WelcomeInfo(); // welcome info + more messages
@@ -165,7 +165,7 @@ namespace ZombieApocalypse
         public static string playerName = "hab";  // the name of the Player       
         public static double playerFood = 10;  // amount of food that Player have
         public static double playerHunger = 100;
-        public static double playerHealth = 0; // health of the player
+        public static double playerHealth = 175; // health of the player
         public static string playerGear;  // current Player gear
         public static double playerCoins = 25; // current Player coins
         public static int playerLevel = 0; // current Player level
@@ -415,9 +415,9 @@ namespace ZombieApocalypse
             else if (choice == 1)
             {
                 Console.WriteLine($"I'm very dissapointed {Player.playerName} ...");
-                //Thread.Sleep(2000);
+                Thread.Sleep(2000);
                 Console.WriteLine("How can you leave him ...");
-                //Thread.Sleep(3000);
+                Thread.Sleep(3000);
                 int minusRandomFood = new Random().Next(1, 5);
                 int lostFood = 0;
                 switch (minusRandomFood)
@@ -445,7 +445,7 @@ namespace ZombieApocalypse
                 }
                 Console.WriteLine($"{Player.playerName} you lost {lostFood} food for this...");
                 Player.playerFood -= lostFood;
-                //Thread.Sleep(1500);
+                Thread.Sleep(1500);
                 Console.WriteLine($"Think about it next time {Player.playerName}.");
                 Console.WriteLine();
             }
@@ -778,10 +778,10 @@ namespace ZombieApocalypse
                 {
                     Console.WriteLine();
                     Console.WriteLine($"{Player.playerName} you've met an {ZombiesTypes.zombieType} with {ZombiesTypes.zombieHealth} Health and {ZombiesTypes.zombieDamage} Attack.");
-                    //Thread.Sleep(2000);
+                    Thread.Sleep(2000);
                     clearing.ClearingLines();
                     Console.WriteLine($"Be careful {Player.playerName}! Good luck!");
-                    //Thread.Sleep(1000);
+                    Thread.Sleep(1000);
                     clearing.ClearingLines();
                 }
 
@@ -940,6 +940,7 @@ namespace ZombieApocalypse
                         }
                     }
 
+                    Thread.Sleep(2000);
                     Console.WriteLine();
                     Console.WriteLine($"Weapon: [{Player.currentWeapon}] | " +
                                               $"{ Environment.NewLine}" +
@@ -951,13 +952,14 @@ namespace ZombieApocalypse
 
                     Console.WriteLine($"Player LVL: [{Player.playerLevel}]  -  EXP: [{Player.playerExp}/100]                                                            ");
                     Console.WriteLine($"Hunger: {Player.playerHunger}/100   -  Food: {Player.playerFood}");
-                    Console.WriteLine($"╔════════════════════════════════╗           ║Current Health: [{Player.playerHealth}]      ");
-                    Console.WriteLine($"║#=# Choose an action to  do: #=#║           ║Current Deffence: [{Player.playerDeffence}]   ");
-                    Console.WriteLine($"║════════════════════════════════║           ║Current Damage: [{Player.currDamage}]      ");
-                    Console.WriteLine($"║ [0] - Fight with the zombie.   ║           ║Current Coins: [{Player.playerCoins}]        ");
-                    Console.WriteLine($"║ [1] - Run Away from the zombie.║           ║Zombie Type : [{ZombiesTypes.zombieType}]        ");
-                    Console.WriteLine($"║ [2] - Hide somewhere.          ║           ║Zombie HP: [{ZombiesTypes.zombieHealth}]         ");
-                    Console.WriteLine($"╚════════════════════════════════╝           ║Zombie Attack: [{ZombiesTypes.zombieDamage}]");
+                    Console.WriteLine($"Fuel: {Player.fuel} Car:{PlayerHelper.isPlayerHaveAnCar} Kid:{PlayerHelper.isPlayerHaveKidHelper} Dog:{PlayerHelper.isPlayerHaveDogHelper}");
+                    Console.WriteLine($"╔════════════════════════════════╗           Current Health: [{Player.playerHealth}]      ");
+                    Console.WriteLine($"║#=# Choose an action to  do: #=#║           Current Deffence: [{Player.playerDeffence}]   ");
+                    Console.WriteLine($"║════════════════════════════════║           Current Damage: [{Player.currDamage}]      ");
+                    Console.WriteLine($"║ [0] - Fight with the zombie.   ║           Current Coins: [{Player.playerCoins}]        ");
+                    Console.WriteLine($"║ [1] - Run Away from the zombie.║           Zombie Type : [{ZombiesTypes.zombieType}]        ");
+                    Console.WriteLine($"║ [2] - Hide somewhere.          ║           Zombie HP: [{ZombiesTypes.zombieHealth}]         ");
+                    Console.WriteLine($"╚════════════════════════════════╝           Zombie Attack: [{ZombiesTypes.zombieDamage}]");
 
                     Console.Write(">> ");
                     int actionToDo = int.Parse(Console.ReadLine());
@@ -967,13 +969,14 @@ namespace ZombieApocalypse
                         Console.WriteLine();
                         Console.WriteLine($" Player LVL: [{Player.playerLevel}]  -  EXP: [{Player.playerExp}/100]                                                            ");
                         Console.WriteLine($"Hunger: {Player.playerHunger}/100    -  Food: {Player.playerFood}");
-                        Console.WriteLine($"╔════════════════════════════════╗           ║Current Health: [{Player.playerHealth}]      ");
-                        Console.WriteLine($"║#=# Choose an action to  do: #=#║           ║Current Deffence: [{Player.playerDeffence}]   ");
-                        Console.WriteLine($"║════════════════════════════════║           ║Current Damage: [{Player.currDamage}]      ");
-                        Console.WriteLine($"║ [0] - Fight with the zombie.   ║           ║Current Coins: [{Player.playerCoins}]        ");
-                        Console.WriteLine($"║ [1] - Run Away from the zombie.║           ║Zombie Type : [{ZombiesTypes.zombieType}]        ");
-                        Console.WriteLine($"║ [2] - Hide somewhere.          ║           ║Zombie HP: [{ZombiesTypes.zombieHealth}]         ");
-                        Console.WriteLine($"╚════════════════════════════════╝           ║Zombie Attack: [{ZombiesTypes.zombieDamage}]");
+                        Console.WriteLine($"Fuel: {Player.fuel} Car:{PlayerHelper.isPlayerHaveAnCar} Kid:{PlayerHelper.isPlayerHaveKidHelper} Dog:{PlayerHelper.isPlayerHaveDogHelper}");
+                        Console.WriteLine($"╔════════════════════════════════╗           Current Health: [{Player.playerHealth}]      ");
+                        Console.WriteLine($"║#=# Choose an action to  do: #=#║           Current Deffence: [{Player.playerDeffence}]   ");
+                        Console.WriteLine($"║════════════════════════════════║           Current Damage: [{Player.currDamage}]      ");
+                        Console.WriteLine($"║ [0] - Fight with the zombie.   ║           Current Coins: [{Player.playerCoins}]        ");
+                        Console.WriteLine($"║ [1] - Run Away from the zombie.║           Zombie Type : [{ZombiesTypes.zombieType}]        ");
+                        Console.WriteLine($"║ [2] - Hide somewhere.          ║           Zombie HP: [{ZombiesTypes.zombieHealth}]         ");
+                        Console.WriteLine($"╚════════════════════════════════╝           Zombie Attack: [{ZombiesTypes.zombieDamage}]");
                         actionToDo = int.Parse(Console.ReadLine());
                         Console.Write(">> ");
                         Console.WriteLine();
@@ -1246,19 +1249,19 @@ namespace ZombieApocalypse
                                     if (PlayerHelper.isPlayerHaveDogHelper == false)
                                     {
                                         Console.WriteLine($"There is something next to you {Player.playerName}???");
-                                        //Thread.Sleep(2000);
+                                        Thread.Sleep(2000);
                                         Console.WriteLine($"An a DOG!");
                                         Console.WriteLine("Is this your new friend in this journey?");
                                         Console.WriteLine($"Do you want to feed him {Player.playerName}?");
-                                        int feedChoice = int.Parse(Console.ReadLine());
+
                                         Console.WriteLine("[0] FEED");
                                         Console.WriteLine("[1] DONT FEED");
-
-                                        if (feedChoice == 0)
+                                        int feedChoice = int.Parse(Console.ReadLine());
+                                        if (feedChoice == 1)
                                         {
                                             Console.WriteLine(">.< ...");
                                         }
-                                        else if (feedChoice == 1)
+                                        else if (feedChoice == 0)
                                         {
                                             Player.playerFood -= 10;
                                             helper.DogHelper();
@@ -1845,7 +1848,7 @@ namespace ZombieApocalypse
         public void ClearingLines()
         {
             Console.SetCursorPosition(0, Console.CursorTop - 1);
-            //Thread.Sleep(4500);
+            Thread.Sleep(4500);
             Console.Write(new string(' ', Console.BufferWidth));
             Console.SetCursorPosition(0, Console.CursorTop);
         }
